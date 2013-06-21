@@ -1,0 +1,86 @@
+@import "compass/reset"
+@import "compass/css3/images"
+@import "compass/css3/transition"
+@import "http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic"
+
+body
+	background: #fffdf1
+	font-family: 'Open Sans'
+	font-weight: 300
+	color: #656462
+
+#narrows 
+	z-index: 0
+	position: fixed
+	width: 100%
+	height: 100%
+#main 
+	z-index: 1
+	position: absolute
+	width: 100%
+	height: 100%
+
+#logo
+	@include background(image-url("main-logo.png"))
+	width: 1000px
+	height: 246px
+	margin-top: 150px
+
+#owl
+	@include background(image-url("owl.png"))
+	width: 90px
+	height: 159px
+	position: absolute
+	top: 100px
+	left: 200px
+
+.wrap
+	width: 1000px
+	margin: auto
+	position: relative
+
+#content
+	//height: 2000px
+
+.main_manu
+	text-align: center
+	margin-top: 60px
+	> a
+		color: #555452
+		text-decoration: none
+		font-size: 1.2em
+		padding: 0 1em
+		&:hover
+			color: #fe0096
+
+#narrows_back,
+#narrows_middle,
+#narrows_front
+	position: absolute
+	width: 100%
+	height: 100%
+
+#narrows_back
+	@include background(image-url("narrows_1.png") repeat scroll 0 0)
+#narrows_middle
+	@include background(image-url("narrows_2.png") repeat scroll 0 0)
+#narrows_front
+	@include background(image-url("narrows_3.png") repeat scroll 0 0)
+
+
+
+.title
+	margin-top: 8em
+	font-weight: 300
+	text-align: center
+	> p 
+		margin: 0
+	.first
+		font-size: 4em
+	.second
+		font-size: 14.6em
+		line-height: .5em
+	.third
+		font-size: 2.7em
+		line-height: 3em
+		margin-right: 2.7em
