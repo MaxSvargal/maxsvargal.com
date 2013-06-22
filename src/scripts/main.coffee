@@ -73,7 +73,9 @@ class portfolioCanvas
 		@start_point = header.scrollHeight - window.innerHeight + 60
 
 		# Bind items render to global scroll
-		window.onscroll = =>
+		window.onscroll = (event) =>
+			window.scroll = null
+			event.preventDefault()
 			p_offset = window.pageYOffset or document.body.scrollTop
 			if p_offset >= @start_point
 				i = 0
@@ -82,13 +84,14 @@ class portfolioCanvas
 					end = start + @item_height
 					if p_offset >= start and p_offset <= end
 						offset = (p_offset - start) / @item_height
-						@drawCanvas name, @projects[name].img, offset
+						@drawCanvas name, @projects[name].img, offset.toFixed 2
 					if p_offset > end and p_offset < end + 50
 						@drawCanvas name, @projects[name].img, 1
 					i++
 					# Debug information
 					#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
-
+		document.ontouchmove = (event) ->
+			event.stopPropagination()
 
 initialization = (->
 	moveNarrows()
