@@ -1,7 +1,7 @@
 @import "compass/reset"
 @import "compass/css3/images"
 @import "compass/css3/transition"
-
+@import "compass/css3/box-sizing"
 //Open Sans font
 @import "http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic"
 
@@ -94,16 +94,14 @@ body
 		width: 100%
 		display: block
 
-#header
-	height: 2000px
 
 .skills
 	.box
 		margin: 1em auto
-		> label
+		.label
 			display: inline-block
 			font-size: 1.6em
-			width: 300px
+			width: 40%
 			text-align: right
 			padding: 0 1em
 			color: #fc0697
@@ -113,6 +111,27 @@ body
 			@include background(linear-gradient(bottom top, #fc0697, #ff6d00))
 			color: #fff
 			text-align: right
-			padding: 0 .5em
+			@@include box-sizing(border-box)
 			font-size: 1.2em
 			line-height: 2em
+			width: 0
+			> span
+				opacity: 0
+				padding: 0 .5em
+	.group
+		margin: 5em 0
+		&.coding
+			.label
+				color: #0190df
+			.bar
+				@include background(linear-gradient(bottom top, #00a2fd, #03f1d1))
+		&.programming
+			.label
+				color: #6a00e8
+			.bar
+				@include background(linear-gradient(bottom top, #6a00e8, #d200ff))
+		&.another
+			.label
+				color: #f09522
+			.bar
+				@include background(linear-gradient(bottom top, #e7b903, #c4eb00))
