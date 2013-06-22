@@ -48,6 +48,16 @@ module.exports = (grunt) ->
 					dest: 'public/scripts'
 					ext: '.js'
 				]
+			json:
+				options:
+					bare: true
+
+				files: [
+					cwd: 'src/db'
+					src: '**/*.coffee'
+					dest: 'public/scripts'
+					ext: '.js'
+				]	
 
 		connect:
 			dev:
@@ -75,8 +85,8 @@ module.exports = (grunt) ->
 					interrupt: true
 
 			coffee: 
-				files: 'src/scripts/**/*.coffee'
-				tasks: 'coffee:compile'
+				files: ['src/scripts/**/*.coffee', 'src/db/*.coffee']
+				tasks: 'coffee:compile:json'
 				options:
 					interrupt: true
 
@@ -88,6 +98,7 @@ module.exports = (grunt) ->
 	# Default task(s).
 	grunt.registerTask 'server', [
 		'coffee:compile'
+		'coffee:json'
 		'jade:compile'
 		'jade:index'
 		'connect:dev'

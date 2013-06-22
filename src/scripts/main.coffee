@@ -1,14 +1,26 @@
 'use strict'
 
+animate = (opts) ->
+	start = new Date
+	delta = opts.delta
+	timer = setInterval( ->
+		progress = (new Date - start) / opts.duration
+		if progress > 1 then progress = 1
+		opts.step delta.progress
+		if progress is 1
+			clearInterval timer
+			opts.complete and opts.complete()
+	, opts.delay or 13)
+
 moveNarrows = ->
 	el_back = document.getElementById 'narrows_back'
 	el_middle = document.getElementById 'narrows_middle'
 	pos = 0
 
 	move = ->
-		pos++
 		el_back.style.backgroundPositionY = "-#{pos}px"
 		el_middle.style.backgroundPositionY = "-#{pos*2}px"
+		pos++
 	window.setInterval move, 70
 
 
@@ -18,7 +30,6 @@ class portfolioCanvas
 		if typeof @projects is 'undefined' or @projects isnt 'array'
 			'You should pass input data of projects'
 		@item_height = 300
-		#@start_point = 226
 		@createNode()
 		@makeImages()
 		@scrollController()
@@ -60,7 +71,7 @@ class portfolioCanvas
 		context.drawImage(img, 0, 0)
 
 		grd = context.createLinearGradient 0, 0, 0, @item_height
-		grd.addColorStop 0, "transparent"
+		grd.addColorStop 0, "rgba(255, 253, 241, #{0.5-offset})"
 		grd.addColorStop 0.5, "rgba(255, 253, 241, #{1-offset})"
 		grd.addColorStop 0.5, "rgba(0, 0, 0, #{1-offset})"
 		grd.addColorStop 1, "rgba(0, 0, 0, #{1-offset})"
@@ -74,8 +85,6 @@ class portfolioCanvas
 
 		# Bind items render to global scroll
 		window.onscroll = (event) =>
-			window.scroll = null
-			event.preventDefault()
 			p_offset = window.pageYOffset or document.body.scrollTop
 			if p_offset >= @start_point
 				i = 0
@@ -90,11 +99,47 @@ class portfolioCanvas
 					i++
 					# Debug information
 					#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
-		document.ontouchmove = (event) ->
+		document.ontouchstart = (event) ->
+			console.log event
 			event.stopPropagination()
 
+		window.addEventListener('DOMMouseScroll', (e) ->
+			console.log e
+			e.preventDefault
+		, false)
+
+
+class skillsBars
+	constructor: (@config) ->
+		@bar_width = 500
+		for name, group of @config
+			@createNode group
+
+	createNode: (group) ->
+		container = document.getElementById 'skills'
+		frag = document.createDocumentFragment()
+		for name, data of group
+			for item in data
+				box = document.createElement 'div'
+				box.id = "sk_bar_#{item.name}"
+				box.className = "box"
+
+				label = document.createElement 'label'
+				label.innerHTML = item.name
+
+				bar = document.createElement 'div'
+				bar.className = group.settings.class
+				bar.style.width = @bar_width * item.progress + "px"
+				bar.innerHTML = "test"
+				
+				box.appendChild label
+				box.appendChild bar
+				frag.appendChild box
+		container.appendChild frag
+
+
 initialization = (->
-	moveNarrows()
+	#moveNarrows()
 	new portfolioCanvas
 		vahtang:
 			src: 'images/vahtang.jpg'
@@ -102,4 +147,41 @@ initialization = (->
 			src: 'images/vahtang.jpg'
 		demo:
 			src: 'images/vahtang.jpg'
+
+	new skillsBars 
+			"design":
+				settings:
+					class: "bar design"
+					text: "Hello, design!"
+				data: [
+					name: "web-design"
+					progress: 0.8
+				,
+					name: "typography"
+					progress: 0.65
+				,
+					name: "illustrations"
+					progress: 0.3
+				,
+					name: "usability"
+					progress: 1
+				]
+
+			"coding":
+				settings:
+					class: "bar coding"
+					text: "Hello, coding!"
+				data: [
+					name: "html (jade, haml)"
+					progress: 0.9
+				,
+					name: "css (sass)"
+					progress: 0.8
+				,
+					name: "javascript"
+					progress: 0.7
+				,
+					name: "coffeescript"
+					progress: 0.55
+				]
 )()
