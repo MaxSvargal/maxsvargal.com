@@ -35,9 +35,10 @@ class portfolioCanvas
 		src.height = @item_height
 		context = src.getContext '2d'
 
-		# Fill canvas element for visual fix low rendering speed
+		# Fill canvas for visual fix low rendering speed
 		context.fillStyle = 'black'
 		context.fillRect(0, 0, src.width, @item_height)
+
 		context.scale(1, offset)
 		context.drawImage(img, 0, 0)
 
@@ -51,10 +52,8 @@ class portfolioCanvas
 		context.fillRect(0, 0, src.width, @item_height)
 
 	scrollController: ->
-		header = document.getElementById "container"
-		@start_point = header.scrollHeight - window.innerHeight + 140
-
-		# Bind items render to global scroll
+		from_above = document.getElementById "container"
+		@start_point = from_above.scrollHeight - window.innerHeight
 		p_offset = window.pageYOffset or document.body.scrollTop
 		if p_offset >= @start_point
 			i = 0
@@ -64,7 +63,7 @@ class portfolioCanvas
 				if p_offset >= start and p_offset <= end
 					offset = (p_offset - start) / @item_height
 					@drawCanvas name, @projects[name].img, offset.toFixed 2
-				if p_offset > end and p_offset < end + 50
+				if p_offset > end #and p_offset < end + 50
 					@drawCanvas name, @projects[name].img, 1
 				i++
 				# Debug information

@@ -29,6 +29,9 @@ config =
 			name: "javascript"
 			progress: 0.75
 		,
+			name: "jquery"
+			progress: 1
+		,
 			name: "coffeescript"
 			progress: 0.61
 		]
@@ -36,22 +39,22 @@ config =
 	"programming":
 		data: [
 			name: "node.js"
-			progress: 0.61
+			progress: 0.65
 		,
 			name: "ruby on rails"
-			progress: 0.5
+			progress: 0.41
 		,
 			name: "php (yii, kohana)"
 			progress: 0.9
 		,
 			name: "phyton"
-			progress: 0.25
+			progress: 0.20
 		,
 			name: "sql (mysql, postgress)"
 			progress: 0.7
 		,
 			name: "nosql (mongodb)"
-			progress: 0.4
+			progress: 0.3
 		]
 
 	"another":
@@ -64,6 +67,9 @@ config =
 		,
 			name: "os x"
 			progress: 0.5
+		,
+			name: "tdd (bdd)"
+			progress: 0.2
 		]
 
 module.exports = config

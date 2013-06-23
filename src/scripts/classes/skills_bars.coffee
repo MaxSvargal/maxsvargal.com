@@ -85,7 +85,7 @@ class skillsBars
 		if p_offset >= start and p_offset <= 1528
 			#console.log start, p_offset
 			for name, obj of @config
-				if p_offset >= start + 350 * i then @animateBars name
+				if p_offset >= start + 450 * i then @animateBars name
 				i++
 
 module.exports = skillsBars

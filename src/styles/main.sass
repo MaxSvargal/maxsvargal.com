@@ -2,12 +2,15 @@
 @import "compass/css3/images"
 @import "compass/css3/transition"
 @import "compass/css3/box-sizing"
+
 //Open Sans font
 //@import "http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,cyrillic"
 
 //Sprites for main
 //@import "main/*.png"
 //@include all-main-sprites
+
+$body_bg_color: #fffdf1
 
 @font-face
 	font-family: 'Open Sans'
@@ -23,7 +26,7 @@
 
 
 body
-	background: #fffdf1
+	background: $body_bg_color
 	font-family: 'Open Sans'
 	font-weight: 300
 	color: #656462
@@ -33,10 +36,14 @@ body
 	position: fixed
 	width: 100%
 	height: 100%
+
 #main 
 	z-index: 1
 	position: absolute
 	width: 100%
+	overflow: hidden
+
+#container
 	overflow: hidden
 
 #logo
@@ -109,6 +116,8 @@ body
 
 
 .skills
+	float: left
+	width: 58%
 	.box
 		margin: 1em auto
 		.label
@@ -116,17 +125,17 @@ body
 			font-size: 1.6em
 			width: 40%
 			text-align: right
-			padding: 0 1em
+			padding: 0 .5em
 			color: #fc0697
 		.bar
 			display: inline-block
-			height: 40px
+			height: 2.6em
 			@include background(linear-gradient(bottom top, #fc0697, #ff6d00))
 			color: #fff
 			text-align: right
 			@@include box-sizing(border-box)
 			font-size: 1.2em
-			line-height: 2em
+			line-height: 2.7em
 			width: 0
 			> span
 				opacity: 0
@@ -148,3 +157,22 @@ body
 				color: #f09522
 			.bar
 				@include background(linear-gradient(bottom top, #e7b903, #c4eb00))
+
+
+.skills_descs
+	float: left
+	width: 42%
+	margin: 3em 0
+	font-weight: 400
+	font-size: 0.9em
+	background: #fffdf1
+	opacity: .85
+	.desc 
+		max-width: 400px
+		padding: 1.2em 2em
+		line-height: 1.4em
+		> p
+			margin: .8em 0
+		.red
+			font-size: 1.6em
+			color: #fe0096
