@@ -35,20 +35,6 @@ module.exports = (grunt) ->
 					client: false
 				files:
 					'public': 'src/index.jade'
-
-		coffee:
-			compile:
-				options:
-					bare: true
-
-				files: [
-					expand: true
-					cwd: 'src/scripts'
-					src: '**/*.coffee'
-					dest: 'public/scripts'
-					ext: '.js'
-				]
-
 		urequire:
 			combine:
 				template: 'combined'
@@ -56,7 +42,6 @@ module.exports = (grunt) ->
 				main: 'main'
 				outputPath: 'public/scripts/main.js'
 				#optimize: 'uglify2'
-
 		connect:
 			dev:
 				options:
@@ -94,7 +79,6 @@ module.exports = (grunt) ->
 
 	# Default task(s).
 	grunt.registerTask 'server', [
-		#'coffee:compile'
 		'urequire:combine'
 		'jade:compile'
 		'jade:index'
