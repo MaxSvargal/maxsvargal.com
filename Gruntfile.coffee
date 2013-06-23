@@ -48,16 +48,14 @@ module.exports = (grunt) ->
 					dest: 'public/scripts'
 					ext: '.js'
 				]
-			json:
-				options:
-					bare: true
 
-				files: [
-					cwd: 'src/db'
-					src: '**/*.coffee'
-					dest: 'public/scripts'
-					ext: '.js'
-				]	
+		urequire:
+			combine:
+				template: 'combined'
+				bundlePath: 'src/scripts/'
+				main: 'main'
+				outputPath: 'public/scripts/main.js'
+				#optimize: 'uglify2'
 
 		connect:
 			dev:
@@ -84,12 +82,11 @@ module.exports = (grunt) ->
 				options:
 					interrupt: true
 
-			coffee: 
-				files: ['src/scripts/**/*.coffee', 'src/db/*.coffee']
-				tasks: 'coffee:compile:json'
+			urequire:
+				files: 'src/scripts/**/*.coffee'
+				tasks: 'urequire:combine'
 				options:
 					interrupt: true
-
 	# Dependencies
 	# ============
 	for name of pkg.devDependencies when name.substring(0, 6) is 'grunt-'
@@ -97,8 +94,8 @@ module.exports = (grunt) ->
 
 	# Default task(s).
 	grunt.registerTask 'server', [
-		'coffee:compile'
-		'coffee:json'
+		#'coffee:compile'
+		'urequire:combine'
 		'jade:compile'
 		'jade:index'
 		'connect:dev'
