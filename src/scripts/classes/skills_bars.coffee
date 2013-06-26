@@ -1,3 +1,5 @@
+'use strict'
+
 class skillsBars
 	constructor: (@config) ->
 		@bar_width = 300

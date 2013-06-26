@@ -1,3 +1,5 @@
+'use strict'
+
 class portfolioCanvas
 	constructor: (@projects) ->
 		if typeof @projects is 'undefined' or @projects isnt 'array'
@@ -39,11 +41,14 @@ class portfolioCanvas
 		context.fillStyle = 'black'
 		context.fillRect(0, 0, src.width, @item_height)
 
-		#Calculate coordinate for centered image 
-		width_offset = src.width - (window.outerWidth / 2)
+		#Calculate coordinate for centered image
+		if window.outerWidth <= img.width
+			width_offset = -((img.width / 2) - (window.outerWidth / 2))
+		else
+			width_offset = (window.outerWidth / 2) - (img.width / 2)
 
 		context.scale(1, offset)
-		context.drawImage(img, -width_offset, 0)
+		context.drawImage(img, width_offset, 0)
 
 		grd = context.createLinearGradient 0, 0, 0, @item_height
 		grd.addColorStop 0, "rgba(255, 253, 241, #{0.5-offset})"
@@ -61,14 +66,13 @@ class portfolioCanvas
 		if p_offset >= @start_point
 			i = 0
 			for name, data of @projects
-				start = @start_point + @item_height * i 
+				start = @start_point + @item_height * i++
 				end = start + @item_height
 				if p_offset >= start and p_offset <= end
 					offset = (p_offset - start) / @item_height
 					@drawCanvas name, @projects[name].img, offset.toFixed 3
 				if p_offset > end and p_offset < end + 100 #Add some ... for fast scroll
 					@drawCanvas name, @projects[name].img, 1
-				i++
 				# Debug information
 				#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
 
