@@ -2,7 +2,7 @@ class portfolioCanvas
 	constructor: (@projects) ->
 		if typeof @projects is 'undefined' or @projects isnt 'array'
 			'You should pass input data of projects'
-		@item_height = 300
+		@item_height = 400
 		@createDom()
 		@makeImages()
 		@scrollController()
@@ -27,7 +27,7 @@ class portfolioCanvas
 				=>
 					@drawCanvas nr, img, 1
 			)(name)
-			img.src = data.src
+			img.src = "/images/portfolio/#{name}/banner.jpg"
 			@projects[name].img = img
 
 	drawCanvas: (name, img, offset) ->
@@ -39,8 +39,11 @@ class portfolioCanvas
 		context.fillStyle = 'black'
 		context.fillRect(0, 0, src.width, @item_height)
 
+		#Calculate coordinate for centered image 
+		width_offset = src.width - (window.outerWidth / 2)
+
 		context.scale(1, offset)
-		context.drawImage(img, 0, 0)
+		context.drawImage(img, -width_offset, 0)
 
 		grd = context.createLinearGradient 0, 0, 0, @item_height
 		grd.addColorStop 0, "rgba(255, 253, 241, #{0.5-offset})"
@@ -62,8 +65,8 @@ class portfolioCanvas
 				end = start + @item_height
 				if p_offset >= start and p_offset <= end
 					offset = (p_offset - start) / @item_height
-					@drawCanvas name, @projects[name].img, offset.toFixed 2
-				if p_offset > end #and p_offset < end + 50
+					@drawCanvas name, @projects[name].img, offset.toFixed 3
+				if p_offset > end and p_offset < end + 100 #Add some ... for fast scroll
 					@drawCanvas name, @projects[name].img, 1
 				i++
 				# Debug information

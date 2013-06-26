@@ -1,4 +1,4 @@
-config = 
+module.exports = 
 	"design":
 		settings:
 			text: "Hello, design!"
@@ -59,6 +59,9 @@ config =
 
 	"another":
 		data: [
+			name: "tdd (bdd)"
+			progress: 0.3
+		,
 			name: "git"
 			progress: 0.75
 		,
@@ -67,9 +70,4 @@ config =
 		,
 			name: "os x"
 			progress: 0.5
-		,
-			name: "tdd (bdd)"
-			progress: 0.2
 		]
-
-module.exports = config

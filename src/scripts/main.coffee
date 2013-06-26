@@ -9,8 +9,8 @@ skills_config = require 'config/skills_bars_config'
 
 initialization = (->
 	bg_anim = new moveNarrows
-	portfolio = new portfolioCanvas portfolio_config
 	skills = new skillsBars skills_config
+	portfolio = new portfolioCanvas portfolio_config
 	window.onscroll = ->
 		portfolio.scrollController()
 		skills.scrollController()

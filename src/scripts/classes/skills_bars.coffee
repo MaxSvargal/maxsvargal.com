@@ -3,7 +3,6 @@ class skillsBars
 		@bar_width = 300
 		for name, group of @config
 			@createDom name, group
-		@scrollController()
 
 	getAbilityLevel: (progress) ->
 		switch
