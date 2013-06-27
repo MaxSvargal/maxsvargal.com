@@ -4,21 +4,27 @@ class portfolioCanvas
 	constructor: (@projects) ->
 		if typeof @projects is 'undefined' or @projects isnt 'array'
 			'You should pass input data of projects'
+		@drawObj = {}
 		@item_height = 400
 		@createDom()
 		@initScrollController()
-		@registerEvents()
 
 	createDom: ->
-		container = document.getElementById 'portfolio'
+		container = document.getElementById "portfolio"
 		frag = document.createDocumentFragment()
 		doc_width = document.body.clientWidth
 		for name, data of @projects	
+			link = document.createElement 'a'
+			link.className = "prtf_link"
+			link.setAttribute "href", "/#!/project/#{name}"
+
 			canvas = document.createElement 'canvas'
 			canvas.id = "prtf_#{name}"
 			canvas.width = doc_width
 			canvas.height = @item_height
-			frag.appendChild canvas
+
+			link.appendChild canvas
+			frag.appendChild link
 		container.appendChild frag
 
 	makeImage: (name) ->
@@ -67,7 +73,6 @@ class portfolioCanvas
 	initScrollController: ->
 		from_above = document.getElementById "container"
 		@start_point = from_above.scrollHeight - window.innerHeight	
-		@drawObj = {}
 		i = 0
 		for name, data of @projects
 			canvas = document.getElementById "prtf_#{name}"
@@ -91,13 +96,5 @@ class portfolioCanvas
 					data.draw(1)
 				# Debug information
 				#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
-
-	registerEvents: ->
-		for name, data of @drawObj
-			data.src.addEventListener 'click', -> #or data.src.onclick, but fuck ie.
-				
-
-	hoverEffects: ->
-
 
 module.exports = portfolioCanvas

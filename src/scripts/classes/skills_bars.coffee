@@ -48,7 +48,6 @@ class skillsBars
 		group = document.getElementById "sk_bar_#{name}"
 		return if group.style.disabled is true
 		group.style.disabled = true
-
 		elems = group.getElementsByClassName 'box'
 
 		animate = (opts) ->
@@ -63,13 +62,11 @@ class skillsBars
 					opts.complete and opts.complete()
 			, opts.delay or 13)
 
-		delta = (progress) ->
-			Math.pow progress, 4
-
 		animate
 			delay: 10
 			duration: 1600
-			delta: delta
+			delta: (progress) ->
+				Math.pow progress, 4
 			step: (delta) ->
 				for el in elems
 					do (el) ->

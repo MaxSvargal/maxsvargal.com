@@ -9,7 +9,7 @@ portfolio_config = require 'config/portfolio_canvas_config'
 skills_config = require 'config/skills_bars_config'
 
 initialization = (->
-	bg_anim = new moveNarrows
+	#bg_anim = new moveNarrows
 	skills = new skillsBars skills_config
 	portfolio = new portfolioCanvas portfolio_config
 	overlay = new portfolioOverlay portfolio_config
