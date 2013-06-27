@@ -7,6 +7,7 @@ class portfolioCanvas
 		@item_height = 400
 		@createDom()
 		@initScrollController()
+		@registerEvents()
 
 	createDom: ->
 		container = document.getElementById 'portfolio'
@@ -51,7 +52,7 @@ class portfolioCanvas
 		grd.addColorStop 0, "rgba(255, 253, 241, #{0.5-offset})"
 		grd.addColorStop 0.5, "rgba(255, 253, 241, #{1-offset})"
 		grd.addColorStop 0.5, "rgba(0, 0, 0, #{1-offset})"
-		grd.addColorStop 1, "rgba(0, 0, 0, #{1-offset})"
+		grd.addColorStop 1, "rgba(0, 0, 0, #{0.7-offset})"
 
 		context.fillStyle = grd
 		context.fillRect(0, 0, src.width, @item_height)
@@ -90,5 +91,13 @@ class portfolioCanvas
 					data.draw(1)
 				# Debug information
 				#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
+
+	registerEvents: ->
+		for name, data of @drawObj
+			data.src.addEventListener 'click', -> #or data.src.onclick, but fuck ie.
+				
+
+	hoverEffects: ->
+
 
 module.exports = portfolioCanvas
