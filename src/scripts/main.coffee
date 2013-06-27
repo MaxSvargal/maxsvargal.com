@@ -14,4 +14,6 @@ initialization = (->
 	window.onscroll = ->
 		portfolio.scrollController()
 		skills.scrollController()
+	window.onresize = ->
+		portfolio.reDraw()
 )()

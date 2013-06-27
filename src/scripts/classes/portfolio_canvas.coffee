@@ -56,11 +56,18 @@ class portfolioCanvas
 		context.fillStyle = grd
 		context.fillRect(0, 0, src.width, @item_height)
 
+	reDraw: ->
+		@scrollController()
+		for name, data of @drawObj
+			data.src.width = window.outerWidth
+			data.src.height = @item_height
+			data.draw(1)
+
 	initScrollController: ->
 		from_above = document.getElementById "container"
 		@start_point = from_above.scrollHeight - window.innerHeight	
-		i = 0
 		@drawObj = {}
+		i = 0
 		for name, data of @projects
 			canvas = document.getElementById "prtf_#{name}"
 			img = @makeImage name
@@ -75,13 +82,12 @@ class portfolioCanvas
 	scrollController: ->
 		p_offset = window.pageYOffset or document.body.scrollTop
 		if p_offset >= @start_point
-			for name, data of @projects
-				drawObj = @drawObj[name]
-				if p_offset >= drawObj.start and p_offset <= drawObj.end
-					offset = (p_offset - drawObj.start) / @item_height
-					drawObj.draw(offset.toFixed 3)
-				if p_offset > drawObj.end and p_offset < drawObj.end + 50 #Add some ... for fast scroll
-					drawObj.draw(1)
+			for name, data of @drawObj
+				if p_offset >= data.start and p_offset <= data.end
+					offset = (p_offset - data.start) / @item_height
+					data.draw(offset.toFixed 3)
+				if p_offset > data.end and p_offset < data.end + 50 #Add some ... for fast scroll
+					data.draw(1)
 				# Debug information
 				#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
 
