@@ -6,8 +6,7 @@ class portfolioCanvas
 			'You should pass input data of projects'
 		@item_height = 400
 		@createDom()
-		@makeImages()
-		@scrollController()
+		@initScrollController()
 
 	createDom: ->
 		container = document.getElementById 'portfolio'
@@ -21,19 +20,17 @@ class portfolioCanvas
 			frag.appendChild canvas
 		container.appendChild frag
 
-	makeImages: ->
-		for name, data of @projects	
-			img = new Image
-			# After looping on all images event is set to last - classic closure problem.
-			img.onload = ((nr) =>
-				=>
-					@drawCanvas nr, img, 1
-			)(name)
-			img.src = "/images/portfolio/#{name}/banner.jpg"
-			@projects[name].img = img
+	makeImage: (name) ->
+		img = new Image
+		# After looping on all images event is set to last - classic closure problem.
+		img.onload = ((nr) =>
+			=>
+				@drawObj[name].draw(1)
+		)(name)
+		img.src = "/images/portfolio/#{name}/banner.jpg"
+		img
 
-	drawCanvas: (name, img, offset) ->
-		src = document.getElementById "prtf_#{name}"
+	drawCanvas: (src, img, offset) ->
 		src.height = @item_height
 		context = src.getContext '2d'
 
@@ -59,20 +56,32 @@ class portfolioCanvas
 		context.fillStyle = grd
 		context.fillRect(0, 0, src.width, @item_height)
 
-	scrollController: ->
+	initScrollController: ->
 		from_above = document.getElementById "container"
-		@start_point = from_above.scrollHeight - window.innerHeight
+		@start_point = from_above.scrollHeight - window.innerHeight	
+		i = 0
+		@drawObj = {}
+		for name, data of @projects
+			canvas = document.getElementById "prtf_#{name}"
+			img = @makeImage name
+			start = @start_point + @item_height * i++
+			@drawObj[name] =
+				src: canvas
+				img: img
+				start: start
+				end: start + @item_height
+				draw: @drawCanvas.bind(this, canvas, img)
+
+	scrollController: ->
 		p_offset = window.pageYOffset or document.body.scrollTop
 		if p_offset >= @start_point
-			i = 0
 			for name, data of @projects
-				start = @start_point + @item_height * i++
-				end = start + @item_height
-				if p_offset >= start and p_offset <= end
-					offset = (p_offset - start) / @item_height
-					@drawCanvas name, @projects[name].img, offset.toFixed 3
-				if p_offset > end and p_offset < end + 100 #Add some ... for fast scroll
-					@drawCanvas name, @projects[name].img, 1
+				drawObj = @drawObj[name]
+				if p_offset >= drawObj.start and p_offset <= drawObj.end
+					offset = (p_offset - drawObj.start) / @item_height
+					drawObj.draw(offset.toFixed 3)
+				if p_offset > drawObj.end and p_offset < drawObj.end + 50 #Add some ... for fast scroll
+					drawObj.draw(1)
 				# Debug information
 				#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
 
