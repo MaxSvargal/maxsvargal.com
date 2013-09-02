@@ -2,8 +2,8 @@
 
 class portfolioCanvas
 	constructor: (@projects) ->
-		if typeof @projects is 'undefined' or @projects isnt 'array'
-			'You should pass input data of projects'
+		if typeof @projects isnt 'object'
+			throw Error 'You should pass input data of projects'
 		@drawObj = {}
 		@item_height = 400
 		@createDom()
@@ -68,7 +68,7 @@ class portfolioCanvas
 		for name, data of @drawObj
 			data.src.width = window.outerWidth
 			data.src.height = @item_height
-			data.draw(1)
+			data.draw 1
 
 	initScrollController: ->
 		from_above = document.getElementById "container"
@@ -92,9 +92,9 @@ class portfolioCanvas
 				if p_offset >= data.start and p_offset <= data.end
 					offset = (p_offset - data.start) / @item_height
 					data.draw(offset.toFixed 3)
-				if p_offset > data.end and p_offset < data.end + 50 #Add some ... for fast scroll
-					data.draw(1)
+				if p_offset > data.end and p_offset < data.end + 50 #Add some margin because of fast scrolling
+					data.draw 1 # Set to end state
 				# Debug information
-				#console.log "Offset: #{offset}"; #{name}: Current offset is #{p_offset} from #{start} end on #{end}.
+				#console.log "Offset: #{offset}; #{name}: Current offset is #{p_offset} from #{start} end on #{end}."
 
 module.exports = portfolioCanvas

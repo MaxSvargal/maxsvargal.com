@@ -13,8 +13,9 @@ module.exports = (grunt) ->
 					generatedImagesDir: 'public/images/'
 					httpImagesPath: '../images'
 					javascriptsDir: 'public/scripts'
-					force: true
-					debugInfo: true
+					# Set to false for faster compiling
+					force: false
+					debugInfo: false
 					relativeAssets: false
 		jade: 
 			compile:
@@ -36,19 +37,36 @@ module.exports = (grunt) ->
 				files:
 					'public': 'src/index.jade'
 		urequire:
-			combine:
+			dev:
 				template: 'combined'
 				bundlePath: 'src/scripts/'
 				main: 'main'
 				outputPath: 'public/scripts/main.js'
-				#optimize: 'uglify2'
+				debugLevel: 3
+			prod:
+				template: 'combined'
+				bundlePath: 'src/scripts/'
+				main: 'main'
+				outputPath: 'public/scripts/main.js'
+				optimize: 'uglify2'	
+
 		connect:
 			dev:
 				options:
 					port: 9000
 					base: 'public'
+					###
+					middleware: (connect, options) -> [
+						require('connect-url-rewrite') ['^([^.]+|.*\\?{1}.*)$ /']
+						connect.static options.base
+						connect.directory options.base
+					]
+					###
 
 		watch:
+			options:
+				livereload: true
+
 			jade: 
 				files: 'src/templates/**/*.jade'
 				tasks: 'jade:compile'
@@ -69,7 +87,7 @@ module.exports = (grunt) ->
 
 			urequire:
 				files: 'src/scripts/**/*.coffee'
-				tasks: 'urequire:combine'
+				tasks: 'urequire:dev'
 				options:
 					interrupt: true
 	# Dependencies
@@ -78,8 +96,8 @@ module.exports = (grunt) ->
 		grunt.loadNpmTasks name
 
 	# Default task(s).
-	grunt.registerTask 'server', [
-		'urequire:combine'
+	grunt.registerTask 'dev', [
+		'urequire:dev'
 		'jade:compile'
 		'jade:index'
 		'connect:dev'
@@ -87,4 +105,13 @@ module.exports = (grunt) ->
 		'watch'
 	]
 
-	grunt.registerTask 'default', 'server'
+	grunt.registerTask 'prod', [
+		'urequire:prod'
+		'jade:compile'
+		'jade:index'
+		'connect:dev'
+		'compass:dev'
+		'watch'
+	]
+
+	grunt.registerTask 'default', 'dev'
