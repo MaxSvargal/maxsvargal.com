@@ -1,0 +1,100 @@
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000322}}
+.narrow.small {
+  width: 0;
+  height: 0;
+  border: 2em solid transparent;
+  border-bottom: 2.82em solid #e7e4db;
+  position: relative;
+  top: -2em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000310}}
+.narrow.small:after {
+  content: "";
+  position: absolute;
+  left: -2em;
+  top: 2.82em;
+  width: 0;
+  height: 0;
+  border: 2em solid transparent;
+  border-top: 2.82em solid #e7e4db;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000324}}
+.narrow.medium {
+  width: 0;
+  height: 0;
+  border: 4em solid transparent;
+  border-bottom: 5.64em solid #e7e4db;
+  position: relative;
+  top: -4em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000310}}
+.narrow.medium:after {
+  content: "";
+  position: absolute;
+  left: -4em;
+  top: 5.64em;
+  width: 0;
+  height: 0;
+  border: 4em solid transparent;
+  border-top: 5.64em solid #e7e4db;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000326}}
+.narrow.large {
+  width: 0;
+  height: 0;
+  border: 6em solid transparent;
+  border-bottom: 8.46em solid #e7e4db;
+  position: relative;
+  top: -6em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000310}}
+.narrow.large:after {
+  content: "";
+  position: absolute;
+  left: -6em;
+  top: 8.46em;
+  width: 0;
+  height: 0;
+  border: 6em solid transparent;
+  border-top: 8.46em solid #e7e4db;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000328}}
+.narrow.xlarge {
+  width: 0;
+  height: 0;
+  border: 8em solid transparent;
+  border-bottom: 11.28em solid #e7e4db;
+  position: relative;
+  top: -8em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000310}}
+.narrow.xlarge:after {
+  content: "";
+  position: absolute;
+  left: -8em;
+  top: 11.28em;
+  width: 0;
+  height: 0;
+  border: 8em solid transparent;
+  border-top: 11.28em solid #e7e4db;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000330}}
+.narrow.xxlarge {
+  width: 0;
+  height: 0;
+  border: 10em solid transparent;
+  border-bottom: 14.1em solid #e7e4db;
+  position: relative;
+  top: -10em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/maxsvargal\/Documents\/sites\/maxsvargal\/src\/styles\/narows\.sass}line{font-family:\0000310}}
+.narrow.xxlarge:after {
+  content: "";
+  position: absolute;
+  left: -10em;
+  top: 14.1em;
+  width: 0;
+  height: 0;
+  border: 10em solid transparent;
+  border-top: 14.1em solid #e7e4db;
+}
