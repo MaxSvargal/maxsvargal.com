@@ -1,4 +1,14 @@
 .DS_Store
 .sass-cache
 node_modules
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
 public
+npm-debug.log
