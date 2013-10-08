@@ -17,6 +17,7 @@ module.exports = (grunt) ->
 					force: false
 					debugInfo: false
 					relativeAssets: false
+					require: ['animation']
 		jade: 
 			compile:
 				options:
