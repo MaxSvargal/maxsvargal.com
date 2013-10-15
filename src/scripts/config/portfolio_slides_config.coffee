@@ -1,5 +1,9 @@
 # URL path to images: images/portfolio/#{name}
 module.exports =
+	"oldchina":
+		bg: "#000"
+		images: ["01.jpg", "02.jpg"]
+		
 	"vahtang":
 		bg: "#000"
 		images: ["01.jpg", "02.jpg"]

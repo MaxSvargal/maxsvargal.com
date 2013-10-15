@@ -63,7 +63,6 @@ module.exports = (grunt) ->
 						connect.directory options.base
 					]
 					###
-
 		watch:
 			options:
 				livereload: true

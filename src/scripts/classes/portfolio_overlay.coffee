@@ -3,32 +3,48 @@
 class portfolioOverlay
 	constructor: (@projects) ->
 		@container = document.getElementById "portfolio_overlay"
-		window.onload = @route
-		window.onpopstate = @popState
+		@cube = document.getElementById 'cube'
+		@initClickEvents()
+		window.addEventListener 'popstate', @popState
 
-	createDom: (name) ->
-		canvas = document.getElementById "prtf_#{name}"
+	createDom: (data) ->
+		@p_offset = window.pageYOffset or document.body.scrollTop
 		el = document.createElement 'div'
-		el.id = "prtf_box_#{name}"
+		el.id = "prtf_box_#{data.name}"
 		el.className = "prtf_box"
-		el.innerHTML = "<h1>#{name}</h1>"
+		el.innerHTML = "<a href='/next_project' class='next_project'>NEXT</a><h1>#{data.name}</h1><img src='/images/portfolio/4sound/banner.jpg'>"
+		el.style.top = @p_offset + "px"
 		@container.appendChild el
+		@cube.className = 'cube rotated'
 
-	route: (evet) =>
-		exp = location.hash.match /^#\!\/project\/(\w{1,})$/i 
-		if exp and url_name = exp[1]
-			#ext_name = for name is url_name in @projects
-			#console.log ext_name
-			@createDom name
-			#if not history.pushState return
-			history.pushState({project: name}, "", location.hash)
+		setTimeout(=>
+			#@container.style.height = 2000 + "px"
+			el.style.top = 0
+			window.scrollTo 0, 0
+		, 1000)
+		
 
 	popState: (event) =>
-		@route()
-		if event.state
-			console.log event.state
+		console.log "Loaded history state ", event.state ? "index" : event.state
+		s = event.state
+		if s
+			if s.onmain is true
+				setTimeout(=>
+					window.scrollTo 0, @p_offset
+					@container.innerHTML = ''
+				, 1000)
+				@cube.className = 'cube'
+			else
+				@createDom s
 		else
-			console.log location.hash
-			history.replaceState(@state, "", location.hash)
+			history.pushState {onmain: true}, "Main", '/'
+
+	initClickEvents: ->
+		parent = document.getElementById 'portfolio'
+		parent.addEventListener 'click', (event) =>
+			event.preventDefault()
+			t = event.target
+			@createDom t.dataset
+			history.pushState {name: t.dataset.name}, t.dataset.title, t.dataset.href
 
 module.exports = portfolioOverlay
