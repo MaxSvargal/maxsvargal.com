@@ -13,42 +13,46 @@
 
 .prtf_link
 	display: block
+	position: relative
+	.prtf-banner-img
+		height: 400px
+		width: 100%
+		background-position: center center
+		background-repeat: repeat-y
+		//background-size: cover
+		background-attachment: scroll
 
-.prtf-banner-img
-	height: 400px
-	width: 100%
-	background-position: center center
-	background-repeat: repeat-y
-	//background-size: cover
-	background-attachment: scroll
-	&:hover
-		background-color: rgba(248, 247, 216, 0.7)
+	.prtf_overlay
+		position: absolute
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		opacity: 0
+		/*
+		 * @include transition-property(all)
+		 * @include transition-duration(1s)
+		 * @include transition-delay(.3s)
+		 * @include transition-timing-function(ease-in) */
+		/* &:hover
+		 *   opacity: 1
+		 *   background-color: rgba(248, 247, 216, 0.7) */
 
 .cube
 	width: 100%
 	-webkit-transition: all 1s
 	margin: 0 auto
-	transition: all 1s 
-	-webkit-transform-style: preserve-3d
-	transform-style: preserve-3d
+	//transition: all 1s 
+	//-webkit-transform-style: preserve-3d
+	//transform-style: preserve-3d
 	&.rotated
 		-webkit-transform: rotateY(-90deg)
-		//transform: rotateY(-90deg)
 		margin-left: -50%
-	#main
-		-webkit-transition: -webkit-transform .33s
-		transition: transform .33s
-		-webkit-transform-style: preserve-3d
-		transform-style: preserve-3d
-
-	#portfolio_overlay
-		position: absolute
-		height: 5000px
-		top: 0
-		width: 950px
-		-webkit-transform: rotateY(90deg) translateX(475px) translateZ(475px)
-		//transform: rotateY(-90deg) translateZ(-475px) translateY(-100%)
-		z-index: 12
+	//#main
+		//-webkit-transition: -webkit-transform .33s
+		//transition: transform .33s
+		//-webkit-transform-style: preserve-3d
+		//transform-style: preserve-3d
 
 .prtf_box
 	position: fixed
@@ -56,8 +60,6 @@
 	opacity: .6
 	height: 2000px
 
-.next_project
-	position
 
 
 

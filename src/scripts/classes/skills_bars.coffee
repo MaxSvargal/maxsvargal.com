@@ -16,11 +16,12 @@ class skillsBars
 
 	createDom: (name, group) ->
 		container = document.getElementById 'skills'
-		frag = document.createDocumentFragment()
 		cgroup = document.createElement 'div'
-		cgroup.className = "group #{name}"
-		cgroup.id = "sk_bar_#{name}"
+
 		for bname, data of group
+			cgroup = document.getElementById "bars_box_#{name}"
+			cgroup.className = "group #{name}"
+
 			for item in data
 				box = document.createElement 'div'
 				box.className = "box"
@@ -30,7 +31,6 @@ class skillsBars
 				label.innerHTML = item.name
 
 				bar = document.createElement 'div'
-				#bar.id = "sk_bar_#{item.name}"
 				bar.className = "bar #{name}"
 				bar.dataset.width = @bar_width * item.progress
 
@@ -41,11 +41,9 @@ class skillsBars
 				box.appendChild label
 				box.appendChild bar
 				cgroup.appendChild box
-		frag.appendChild cgroup
-		container.appendChild frag
 
 	animateBars: (name) ->
-		group = document.getElementById "sk_bar_#{name}"
+		group = document.getElementById "bars_box_#{name}"
 		return if group.style.disabled is true
 		group.style.disabled = true
 		elems = group.getElementsByClassName 'box'
@@ -80,7 +78,7 @@ class skillsBars
 		start = header.scrollHeight - window.innerHeight + 220
 		p_offset = window.pageYOffset or document.body.scrollTop
 		i = 0
-		if p_offset >= start and p_offset <= 1528
+		if p_offset >= start and p_offset <= 1828
 			#console.log start, p_offset
 			for name, obj of @config
 				if p_offset >= start + 450 * i then @animateBars name

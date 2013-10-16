@@ -23,3 +23,8 @@
 #narrows_middle
   @include background(image-url("narrows_2.png") repeat scroll 0 0)
   @include animation(animateNarrows 100s infinite linear)
+
+#narrows_back,
+#narrows_middle
+  &.faster
+    @include animation-duration(50s)

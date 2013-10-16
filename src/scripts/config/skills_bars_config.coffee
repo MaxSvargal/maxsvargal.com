@@ -16,50 +16,47 @@ module.exports =
 			progress: 1
 		]
 
-	"coding":
+	"front":
 		settings:
 			text: "Hello, coding!"
 		data: [
 			name: "html (jade, haml)"
 			progress: 1
 		,
-			name: "css (sass)"
+			name: "css (stylus, sass)"
 			progress: 0.9
 		,
 			name: "javascript"
-			progress: 0.75
+			progress: 0.8
 		,
 			name: "jquery"
-			progress: 1
+			progress: 0.75
 		,
 			name: "coffeescript"
-			progress: 0.61
+			progress: 0.85
 		]
 
-	"programming":
+	"back":
 		data: [
 			name: "node.js"
-			progress: 0.65
+			progress: 0.75
 		,
 			name: "ruby on rails"
 			progress: 0.41
 		,
 			name: "php (yii, kohana)"
-			progress: 0.9
-		,
-			name: "phyton"
-			progress: 0.20
+			progress: 0.6
 		,
 			name: "sql (mysql, postgress)"
-			progress: 0.7
+			progress: 0.6
 		,
-			name: "nosql (mongodb)"
-			progress: 0.3
+			name: "nosql (mongodb, redis)"
+			progress: 0.7
 		]
 
 	"another":
 		data: [
-			name: "tdd (bdd)"
+			name: "tdd & bdd"
 			progress: 0.3
 		,
 			name: "git"
@@ -69,5 +66,5 @@ module.exports =
 			progress: 0.65
 		,
 			name: "os x"
-			progress: 0.5
+			progress: 0.61
 		]

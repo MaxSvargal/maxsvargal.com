@@ -2,8 +2,9 @@
 
 class portfolioOverlay
 	constructor: (@projects) ->
+		@main = document.getElementById "main"
 		@container = document.getElementById "portfolio_overlay"
-		@cube = document.getElementById 'cube'
+		#@cube = document.getElementById 'cube'
 		@initClickEvents()
 		window.addEventListener 'popstate', @popState
 
@@ -15,7 +16,9 @@ class portfolioOverlay
 		el.innerHTML = "<a href='/next_project' class='next_project'>NEXT</a><h1>#{data.name}</h1><img src='/images/portfolio/4sound/banner.jpg'>"
 		el.style.top = @p_offset + "px"
 		@container.appendChild el
-		@cube.className = 'cube rotated'
+		@container.className = "pt-page pt-page-current"
+		@main.className = "pt-page"
+		#@cube.className = 'cube rotated'
 
 		setTimeout(=>
 			#@container.style.height = 2000 + "px"

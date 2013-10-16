@@ -1,6 +1,4 @@
 .skills
-	float: left
-	width: 58%
 	.box
 		margin: 1em auto
 		.label
@@ -10,6 +8,8 @@
 			text-align: right
 			padding: 0 .5em
 			color: #fc0697
+			@media screen and(max-width: $break-medium)
+				width: 45%
 		.bar
 			display: inline-block
 			height: 2.6em
@@ -24,13 +24,19 @@
 				opacity: 0
 				padding: 0 .5em
 	.group
-		margin: 5em 0
-		&.coding
+		margin: 4em 0
+		float: left
+		clear: left
+		width: 55%
+		@media screen and(max-width: $break-medium)
+			width: 100%
+			margin: 1em 0
+		&.front
 			.label
 				color: #0190df
 			.bar
 				@include background(linear-gradient(bottom top, #00a2fd, #03f1d1))
-		&.programming
+		&.back
 			.label
 				color: #6a00e8
 			.bar
@@ -41,19 +47,23 @@
 			.bar
 				@include background(linear-gradient(bottom top, #e7b903, #c4eb00))
 
-
-.skills_descs
-	float: left
-	width: 42%
-	margin: 3em 0
-	font-weight: 400
-	font-size: 0.9em
-	background: #fffdf1
-	opacity: .85
 	.desc 
 		max-width: 400px
 		padding: 1.2em 2em
 		line-height: 1.4em
+		float: left
+		width: 40%
+		margin: 3em 0
+		font-weight: 400
+		font-size: 0.9em
+		background: #fffdf1
+		opacity: .85
+		@media screen and(max-width: $break-medium)
+			width: 100%
+			max-width: 50%
+			margin: 0 auto 4em auto
+			float: none
+			clear: both
 		> p
 			margin: .8em 0
 		.red
