@@ -1,6 +1,6 @@
 'use strict'
 
-class skillsBars
+module.exports = class skillsBars
 	constructor: (@config) ->
 		@bar_width = 300
 		for name, group of @config
@@ -83,5 +83,3 @@ class skillsBars
 			for name, obj of @config
 				if p_offset >= start + 450 * i then @animateBars name
 				i++
-
-module.exports = skillsBars
