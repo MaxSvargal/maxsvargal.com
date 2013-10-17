@@ -1,19 +1,19 @@
 'use strict'
 
-portfolioSlides = require 'classes/portfolio_slides'
-portfolioOverlay = require 'classes/portfolio_overlay'
-skillsBars = require 'classes/skills_bars'
+PortfolioSlides = require 'classes/portfolio_slides'
+PortfolioOverlay = require 'classes/portfolio_overlay'
+SkillsBars = require 'classes/skills_bars'
+Navigation = require 'classes/navigation'
 
 portfolio_config = require 'config/portfolio_slides_config'
 skills_config = require 'config/skills_bars_config'
 
 initialization = (->
-  skills = new skillsBars skills_config
-  portfolio = new portfolioSlides portfolio_config
-  overlay = new portfolioOverlay portfolio_config
+  skills = new SkillsBars skills_config
+  portfolio = new PortfolioSlides portfolio_config
+  overlay = new PortfolioOverlay portfolio_config
+  navigation = new Navigation
   window.onscroll = ->
     portfolio.scrollController()
     skills.scrollController()
-  #window.onresize = ->
-  #  portfolio.reDraw()
 )()
