@@ -60,11 +60,11 @@ module.exports =
 			progress: 0.3
 		,
 			name: "git"
-			progress: 0.75
-		,
-			name: "linux"
 			progress: 0.65
 		,
-			name: "os x"
+			name: "linux"
 			progress: 0.61
+		,
+			name: "os x"
+			progress: 0.5
 		]

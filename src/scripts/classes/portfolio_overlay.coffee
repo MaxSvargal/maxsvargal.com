@@ -1,6 +1,6 @@
 'use strict'
 
-class portfolioOverlay
+module.exports = class portfolioOverlay
 	constructor: (@projects) ->
 		@main = document.getElementById "main"
 		@container = document.getElementById "portfolio_overlay"
@@ -49,5 +49,3 @@ class portfolioOverlay
 			t = event.target
 			@createDom t.dataset
 			history.pushState {name: t.dataset.name}, t.dataset.title, t.dataset.href
-
-module.exports = portfolioOverlay
