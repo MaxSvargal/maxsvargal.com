@@ -51,6 +51,13 @@ module.exports = (grunt) ->
 				outputPath: 'public/scripts/main.js'
 				optimize: 'uglify2'	
 
+		copy:
+			img:
+				expand: true
+				cwd: 'src/images'
+				src: '**'
+				dest: 'public/images'
+
 		connect:
 			dev:
 				options:
@@ -111,7 +118,7 @@ module.exports = (grunt) ->
 		'jade:index'
 		'connect:dev'
 		'compass:dev'
-		'watch'
+		'copy:img'
 	]
 
 	grunt.registerTask 'default', 'dev'
