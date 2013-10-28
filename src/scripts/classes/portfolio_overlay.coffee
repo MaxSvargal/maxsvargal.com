@@ -2,9 +2,8 @@
 
 module.exports = class portfolioOverlay
 	constructor: (@projects) ->
-		@main = document.getElementById "main"
+		@main = document.getElementById 'page_main'
 		@container = document.getElementById "portfolio_overlay"
-		#@cube = document.getElementById 'cube'
 		@initClickEvents()
 		window.addEventListener 'popstate', @popState
 
@@ -14,29 +13,16 @@ module.exports = class portfolioOverlay
 		el.id = "prtf_box_#{data.name}"
 		el.className = "prtf_box"
 		el.innerHTML = "<a href='/next_project' class='next_project'>NEXT</a><h1>#{data.name}</h1><img src='/images/portfolio/4sound/banner.jpg'>"
-		el.style.top = @p_offset + "px"
 		@container.appendChild el
-		@container.className = "pt-page pt-page-current"
-		@main.className = "pt-page"
-		#@cube.className = 'cube rotated'
-
-		setTimeout(=>
-			#@container.style.height = 2000 + "px"
-			el.style.top = 0
-			window.scrollTo 0, 0
-		, 1000)
-		
 
 	popState: (event) =>
 		console.log "Loaded history state ", event.state ? "index" : event.state
 		s = event.state
 		if s
 			if s.onmain is true
-				setTimeout(=>
-					window.scrollTo 0, @p_offset
-					@container.innerHTML = ''
-				, 1000)
-				@cube.className = 'cube'
+				@container.className = 'pt-page'
+				@main.className = 'pt-page pt-page-current pt-page-moveFromRightFade'
+				window.document.body.className = ''
 			else
 				@createDom s
 		else
@@ -47,5 +33,15 @@ module.exports = class portfolioOverlay
 		parent.addEventListener 'click', (event) =>
 			event.preventDefault()
 			t = event.target
-			@createDom t.dataset
+			href = t.offsetParent.getAttribute 'href'
 			history.pushState {name: t.dataset.name}, t.dataset.title, t.dataset.href
+			
+			@createDom t.dataset
+
+			# Animation classes
+			outClass = 'pt-page pt-page-current pt-page-moveToLeftFade'
+			inClass = 'pt-page pt-page-current pt-page-moveFromRightFade pt-page-ontop'
+
+			@main.className = outClass
+			@container.className = inClass
+			window.document.body.className = 'hidden-scroll'

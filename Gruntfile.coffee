@@ -18,6 +18,13 @@ module.exports = (grunt) ->
 					debugInfo: false
 					relativeAssets: false
 					require: ['animation']
+			prod:
+				options:
+					sassDir: 'src/styles'
+					cssDir: 'public/styles'
+					environment: 'production'
+					require: ['animation']
+
 		jade: 
 			compile:
 				options:
@@ -117,7 +124,7 @@ module.exports = (grunt) ->
 		'jade:compile'
 		'jade:index'
 		'connect:dev'
-		'compass:dev'
+		'compass:prod'
 		'copy:img'
 	]
 

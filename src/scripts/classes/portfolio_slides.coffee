@@ -28,14 +28,9 @@ module.exports = class Portfolio
       img.style.backgroundImage = "url(/images/portfolio/#{name}/banner.jpg)"
       img.dataset.name = name
       img.dataset.href = "/project/#{name}"
-
-      # Create overlay for hover effect
-      overlay = document.createElement 'div'
-      overlay.className = "prtf_overlay"
-      overlay.style.backgroundColor = "rgba(#{data.bg_rgba})"
+      img.dataset.title = name
 
       link.appendChild img
-      link.appendChild overlay
       frag.appendChild link
 
       # Cache elements to array for faster animation
