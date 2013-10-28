@@ -59,19 +59,21 @@ body
 
 .main_manu
 	text-align: center
-	margin-top: 60px
+	margin-top: 2em
+	@media screen and(max-width: $break-medium)
+		margin-top: 3em
 	> a
 		color: #555452
 		text-decoration: none
 		font-size: 1.2em
-		padding: 0 1em
+		padding: 1em
 		&:hover
 			color: #fe0096
 		@media screen and(max-width: $break-medium)
 			font-size: .95em
 			
 .title
-	margin-top: 8em
+	margin-top: 5em
 	font-weight: 300
 	text-align: center
 	@media screen and(max-height: 700px)
