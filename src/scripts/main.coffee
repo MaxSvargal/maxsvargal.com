@@ -13,7 +13,9 @@ initialization = (->
   portfolio = new PortfolioSlides portfolio_config
   overlay = new PortfolioOverlay portfolio_config
   navigation = new Navigation
-  window.onscroll = ->
-    portfolio.scrollController()
-    skills.scrollController()
+
+  page = document.getElementById 'page_main'
+  page.onscroll = (event) ->
+    portfolio.scrollController(event.target)
+    skills.scrollController(event.target)
 )()

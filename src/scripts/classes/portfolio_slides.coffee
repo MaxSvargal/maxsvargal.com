@@ -46,8 +46,8 @@ module.exports = class Portfolio
       @objs[name].style.backgroundPosition = "50% #{pos}px"
 
   # On every scroll page event this method started
-  scrollController: ->
-    page_offset = window.pageYOffset or document.body.scrollTop
+  scrollController: (obj) ->
+    page_offset = obj.pageYOffset or obj.scrollTop
     ptrf_offset = window.innerHeight + page_offset - @from_above.scrollHeight
     if ptrf_offset > 0
       @reDraw ptrf_offset

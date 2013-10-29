@@ -3,6 +3,8 @@
 module.exports = class skillsBars
 	constructor: (@config) ->
 		@bar_width = 300
+		header = document.getElementById "header"
+		@start = header.scrollHeight - window.innerHeight + 220
 		for name, group of @config
 			@createDom name, group
 
@@ -73,13 +75,12 @@ module.exports = class skillsBars
 						bar[0].style.width = bar[0].dataset.width * delta + 'px'
 						label[0].style.opacity = delta
 
-	scrollController: ->
-		header = document.getElementById "header"
-		start = header.scrollHeight - window.innerHeight + 220
-		p_offset = window.pageYOffset or document.body.scrollTop
+	scrollController: (obj) ->
+		p_offset = obj.pageYOffset or obj.scrollTop
+
 		i = 0
-		if p_offset >= start and p_offset <= 1828
-			#console.log start, p_offset
+		if p_offset >= @start and p_offset <= 1828
 			for name, obj of @config
-				if p_offset >= start + 450 * i then @animateBars name
+				if p_offset >= @start + 450 * i
+					@animateBars name
 				i++
