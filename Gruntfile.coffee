@@ -70,13 +70,12 @@ module.exports = (grunt) ->
 				options:
 					port: 9000
 					base: 'public'
-					###
 					middleware: (connect, options) -> [
 						require('connect-url-rewrite') ['^([^.]+|.*\\?{1}.*)$ /']
 						connect.static options.base
 						connect.directory options.base
 					]
-					###
+		
 		watch:
 			options:
 				livereload: true

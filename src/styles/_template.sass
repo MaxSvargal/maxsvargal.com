@@ -94,16 +94,6 @@ body
 		line-height: 3em
 		margin-right: 2.7em
 
-.pt-main
-	width: 100%
-	height: 100%
-	overflow-x: hidden
-	overflow-y: hidden
-	-webkit-backface-visibility: hidden
-	-moz-backface-visibility: hidden
-	backface-visibility: hidden
-	-webkit-transform-style: preserve-3d
-
 .pt-page
 	width: 100%
 	position: absolute
@@ -156,12 +146,24 @@ body
 
 
 
+@-webkit-keyframes rotateRoomLeftOut
+	to
+		opacity: .3
+		-webkit-transform: translateX(-100%) rotateY(90deg)
+.pt-page-rotateRoomLeftOut
+	-webkit-transform-origin: 100% 50%
+	-webkit-animation: rotateRoomLeftOut .8s both ease
 
 
 
+@-webkit-keyframes rotateRoomLeftIn
+	from
+		opacity: .3
+		-webkit-transform: translateX(100%) rotateY(-90deg)
 
-
-
+.pt-page-rotateRoomLeftIn
+	-webkit-transform-origin: 0% 50%
+	-webkit-animation: rotateRoomLeftIn .8s both ease
 
 
 

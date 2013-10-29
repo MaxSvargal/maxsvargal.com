@@ -33,10 +33,11 @@ module.exports = class portfolioOverlay
 		parent.addEventListener 'click', (event) =>
 			event.preventDefault()
 			t = event.target
-			href = t.offsetParent.getAttribute 'href'
 			history.pushState {name: t.dataset.name}, t.dataset.title, t.dataset.href
-			
-			@createDom t.dataset
+	
+			item_obj = document.getElementById "prtf_box_#{t.dataset.name}"
+			if not item_obj
+				@createDom t.dataset
 
 			# Animation classes
 			outClass = 'pt-page pt-page-current pt-page-moveToLeftFade'
