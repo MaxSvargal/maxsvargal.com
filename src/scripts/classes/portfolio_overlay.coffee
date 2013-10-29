@@ -15,16 +15,35 @@ module.exports = class portfolioOverlay
 		el.innerHTML = "<a href='/next_project' class='next_project'>NEXT</a><h1>#{data.name}</h1><img src='/images/portfolio/4sound/banner.jpg'>"
 		@container.appendChild el
 
+	animate: (direction) ->
+		setClasses = (fromobj, toobj) ->
+			mainClass = 'pt-page'
+			currentClass = 'pt-page-current'
+			outClass = 'pt-page-rotateRoomLeftOut pt-page-ontop'
+			inClass = 'pt-page-rotateRoomLeftIn'
+			
+			fromobj.className = "#{mainClass} #{outClass}"
+			toobj.className = "#{mainClass} #{currentClass} #{inClass}"
+			setTimeout(->
+				toobj.className = "#{mainClass}"
+				toobj.className = "#{mainClass} #{currentClass}"
+			, 600)
+
+		if direction is 'toportfolio'
+			setClasses @main, @container
+		else if direction is 'tomain'
+			setClasses @container, @main
+
+
 	popState: (event) =>
 		console.log "Loaded history state ", event.state ? "index" : event.state
 		s = event.state
 		if s
 			if s.onmain is true
-				@container.className = 'pt-page'
-				@main.className = 'pt-page pt-page-current pt-page-moveFromRightFade'
-				window.document.body.className = ''
-			else
+				@animate 'tomain'
+			else if s.name
 				@createDom s
+				@animate 'toportfolio'
 		else
 			history.pushState {onmain: true}, "Main", '/'
 
@@ -39,10 +58,5 @@ module.exports = class portfolioOverlay
 			if not item_obj
 				@createDom t.dataset
 
-			# Animation classes
-			outClass = 'pt-page pt-page-current pt-page-moveToLeftFade'
-			inClass = 'pt-page pt-page-current pt-page-moveFromRightFade pt-page-ontop'
+			@animate 'toportfolio'
 
-			@main.className = outClass
-			@container.className = inClass
-			window.document.body.className = 'hidden-scroll'
