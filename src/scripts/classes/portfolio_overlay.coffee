@@ -114,14 +114,20 @@ module.exports = class portfolioOverlay
     fromProject: =>
       @animate().toNext()
 
+  clearContainer: (delay = 1000) ->
+    if delay is 0
+      @container.innerHTML = ''
+    else
+      setTimeout(=>
+        @container.innerHTML = ''
+      , delay)
+
   registerBackEvent: ->
     listener = (event) ->
       event.preventDefault()
       @animate().toLeft()
+      @clearContainer()
       history.pushState {onmain: true}, "Main", '/'
-      setTimeout(=>
-        @container.innerHTML = ''
-      , 1000)
 
     prew_btns = document.getElementsByClassName 'prew-btn'
     for btn in prew_btns
@@ -131,8 +137,12 @@ module.exports = class portfolioOverlay
     listener = (event) ->
       event.preventDefault()
       name = @getNextProjectName()
-      @showProject(name).fromProject()
-      history.pushState {name: name, from_main: false}, name, "/project/#{name}"
+      if not name
+        @animate().toLeft()
+        @clearContainer()
+      else
+        @showProject(name).fromProject()
+        history.pushState {name: name, from_main: false}, name, "/project/#{name}"
 
     next_btns = document.getElementsByClassName 'next-btn'
     for btn in next_btns
@@ -155,7 +165,7 @@ module.exports = class portfolioOverlay
     if s
       if s.name
         if s.from_main is true
-          @container.innerHTML = ''
+          @clearContainer 0
           @showProject(s.name).fromMain()
         else
           console.log "TODO: Draw prew animation"
@@ -170,7 +180,7 @@ module.exports = class portfolioOverlay
       event.preventDefault()
       d = event.target.dataset
       history.pushState {name: d.name, from_main: true}, d.name, "/project/#{d.name}"
-      @container.innerHTML = ''
+      @clearContainer 0
       @showProject(d.name).fromMain()
 
 
