@@ -8,7 +8,7 @@
 	min-height: 100%
 	background: #000
 	z-index: 3
-	padding: 2em 0
+	//padding: 2em 0
 	h1
 		color: #fff
 
@@ -32,8 +32,7 @@
 
 .prtf-img-box
 	margin: auto
-	width: 95%
-	margin-bottom: 4em
+	padding: 2em 2em .5em 2em
 	.prtf-img-header
 		background: #d4d4d4
 		height: 2em
@@ -49,12 +48,21 @@
 		width: 100%
 
 .nav-btns-box
-	position: relative
 	padding: 2em
-	line-height: 0
+	overflow: hidden
 	.nav-btn
-		font-size: 3em
+		@include transition(all .5s ease-in-out)
+		font-size: 2em
+		line-height: 1em
+		padding: .4em .8em
 		color: #fff
+		border-radius: 6px
+		border: 2px solid rgba(255, 255, 255, .2)
+		display: block
+		text-decoration: none
+		&:hover
+			border: 2px solid rgba(255, 255, 255, .5)
+			background: rgba(255, 255, 255, .1)
 		&.prew-btn
 			float: left	
 		&.next-btn
