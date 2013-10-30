@@ -7,13 +7,60 @@ module.exports = class portfolioOverlay
     @initClickEvents()
     window.addEventListener 'popstate', @popState
 
+    # DEV
+    @createDom {name: '4sound', images: ['01.jpg', '02.jpg'], bg_rgba: "220, 150, 39, .7"}
+    @animate().toRight()
+
   createDom: (data) ->
-    @p_offset = window.pageYOffset or document.body.scrollTop
+    frag = document.createDocumentFragment()
+    # Portfolio page
     el = document.createElement 'div'
     el.id = "prtf_box_#{data.name}"
     el.className = "prtf_box"
-    el.innerHTML = "<a href='/next_project' class='next_project'>NEXT</a><h1>#{data.name}</h1><img src='/images/portfolio/4sound/banner.jpg'>"
-    @container.appendChild el
+    el.style.backgroundColor = "rgba(#{data.bg_rgba})"
+    # Images
+    for img_name in data.images
+      # Main image box
+      box = document.createElement 'div'
+      box.className = 'prtf-img-box'
+      # Line with buttons
+      header = document.createElement 'div'
+      header.className = 'prtf-img-header'
+      # Buttons in line
+      for dotn in [0..2]
+        dot = document.createElement 'span'
+        header.appendChild dot
+      # Portfolio image
+      img = document.createElement 'img'
+      img.className = 'prtf-img'
+      img.src = "/images/portfolio/#{data.name}/#{img_name}"
+
+      # Append to main box
+      box.appendChild header
+      box.appendChild img
+      el.appendChild box
+
+    # Navigation links
+    btns_box = document.createElement 'div'
+    btns_box.className = 'nav-btns-box'
+
+    prew_btn = document.createElement 'a'
+    prew_btn.href = '#'
+    prew_btn.className = 'nav-btn prew-btn'
+    prew_btn.innerHTML = 'Go back'
+
+    next_btn = document.createElement 'a'
+    next_btn.href = '#'
+    next_btn.className = 'nav-btn next-btn'
+    next_btn.innerHTML = 'Next project'
+
+    btns_box.appendChild prew_btn
+    btns_box.appendChild next_btn
+    el.appendChild btns_box
+
+    # Append to DOM
+    frag.appendChild el
+    @container.appendChild frag
 
   animate: ->
     leftObj = @main
