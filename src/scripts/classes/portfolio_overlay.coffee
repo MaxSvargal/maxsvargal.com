@@ -41,12 +41,12 @@ module.exports = class portfolioOverlay
     btns_box.className = 'nav-btns-box'
 
     prew_btn = document.createElement 'a'
-    prew_btn.href = '#'
+    prew_btn.href = '/'
     prew_btn.className = 'nav-btn prew-btn'
-    prew_btn.innerHTML = 'Go back'
+    prew_btn.innerHTML = 'To main'
 
     next_btn = document.createElement 'a'
-    next_btn.href = '#'
+    next_btn.href = "/project/#{@getNextProjectName()}"
     next_btn.className = 'nav-btn next-btn'
     next_btn.innerHTML = 'Next project'
 
@@ -86,24 +86,48 @@ module.exports = class portfolioOverlay
         rightObj.className = "#{mainClass} #{currentClass}"
       , 1000)
 
+    rightToRight: ->
+      return
+
 
   showProject: (name) ->
+    @curr_project = name
     # Clear container
-    @container.innerHTML = ''
-    #if @prew_btn
-    #  @prew_btn.removeEventListener 'click'
+    #@container.innerHTML = ''
     #Get info from config by name
     data = @projects[name]
     data.name = name
     @createDom data
     @registerBackEvent()
-    @animate().toRight()
+    @registerNextEvent()
+
+    fromMain: =>
+      @animate().toRight()
+    fromProject: =>
+      @animate().rightToRight()
 
   registerBackEvent: ->
-    listener = ->
+    listener = (event) ->
+      event.preventDefault()
       @animate().toLeft()
+      history.replaceState {onmain: true}, "Main", '/'
 
     @prew_btn = (document.getElementsByClassName 'prew-btn')[0]
+    @prew_btn.addEventListener 'click', listener.bind(this), true
+
+  getNextProjectName: ->
+    keys = Object.keys(@projects)
+    index = keys.indexOf @curr_project
+    keys[index + 1]
+     
+  registerNextEvent: ->
+    listener = (event) ->
+      event.preventDefault()
+      name = @getNextProjectName()
+      @showProject(name).fromProject()
+      history.pushState {name: name}, name, "/project/#{name}"
+
+    @prew_btn = (document.getElementsByClassName 'next-btn')[0]
     @prew_btn.addEventListener 'click', listener.bind(this), true
       
   popState: (event) =>
@@ -111,7 +135,7 @@ module.exports = class portfolioOverlay
     s = event.state
     if s
       if s.name
-        @showProject s.name
+        @showProject(s.name).fromMain()
       else
         @animate().toLeft()
     else
@@ -123,7 +147,7 @@ module.exports = class portfolioOverlay
       event.preventDefault()
       d = event.target.dataset
       history.pushState {name: d.name}, d.name, "/project/#{d.name}"
-      @showProject d.name
+      @showProject(d.name).fromMain()
 
 
 

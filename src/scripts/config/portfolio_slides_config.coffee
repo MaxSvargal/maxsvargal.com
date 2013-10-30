@@ -1,8 +1,8 @@
 # URL path to images: images/portfolio/#{name}
-module.exports =
+module.exports = 
 	"oldchina":
 		bg_rgba: "188, 55, 0, .5"
-		images: ["01.jpg", "02.jpg"]
+		images: ["01.jpg", "02.jpg", "03.jpg"]
 
 	"4sound":
 		bg_rgba: "220, 150, 39, .7"
