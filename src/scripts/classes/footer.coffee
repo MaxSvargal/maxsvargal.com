@@ -12,7 +12,6 @@ module.exports = class Footer
     if @checked is false
       page_height = @container.clientHeight + @portfolio.clientHeight
       page_offset = obj.pageYOffset or obj.scrollTop
-      console.log page_height
       if page_offset >= page_height
         @checked = true
         setClassName = ->
