@@ -86,8 +86,16 @@ module.exports = class portfolioOverlay
         rightObj.className = "#{mainClass} #{currentClass}"
       , 1000)
 
-    rightToRight: ->
-      return
+    toNext: =>
+      leftObj = document.getElementById "prtf_box_#{@getPrewProjectName()}"
+      rightObj = document.getElementById "prtf_box_#{@curr_project}"
+
+      leftObj.className = "#{mainClass} #{currentClass} pt-page-rotateRoomTopOut"
+      rightObj.className = "#{mainClass} #{currentClass} pt-page-rotateRoomTopIn"
+      setTimeout(->
+        leftObj.remove()
+        rightObj.className = "prtf_box #{currentClass}"
+      , 1000)
 
 
   showProject: (name) ->
@@ -104,38 +112,53 @@ module.exports = class portfolioOverlay
     fromMain: =>
       @animate().toRight()
     fromProject: =>
-      @animate().rightToRight()
+      @animate().toNext()
 
   registerBackEvent: ->
     listener = (event) ->
       event.preventDefault()
       @animate().toLeft()
-      history.replaceState {onmain: true}, "Main", '/'
+      history.pushState {onmain: true}, "Main", '/'
+      setTimeout(=>
+        @container.innerHTML = ''
+      , 1000)
 
-    @prew_btn = (document.getElementsByClassName 'prew-btn')[0]
-    @prew_btn.addEventListener 'click', listener.bind(this), true
+    prew_btns = document.getElementsByClassName 'prew-btn'
+    for btn in prew_btns
+      btn.addEventListener 'click', listener.bind(this)
 
-  getNextProjectName: ->
-    keys = Object.keys(@projects)
-    index = keys.indexOf @curr_project
-    keys[index + 1]
-     
   registerNextEvent: ->
     listener = (event) ->
       event.preventDefault()
       name = @getNextProjectName()
       @showProject(name).fromProject()
-      history.pushState {name: name}, name, "/project/#{name}"
+      history.pushState {name: name, from_main: false}, name, "/project/#{name}"
 
-    @prew_btn = (document.getElementsByClassName 'next-btn')[0]
-    @prew_btn.addEventListener 'click', listener.bind(this), true
+    next_btns = document.getElementsByClassName 'next-btn'
+    for btn in next_btns
+      btn.addEventListener 'click', listener.bind(this)
+
+
+  getNextProjectName: ->
+    keys = Object.keys(@projects)
+    index = keys.indexOf @curr_project
+    keys[index + 1]
+
+  getPrewProjectName: ->
+    keys = Object.keys(@projects)
+    index = keys.indexOf @curr_project
+    keys[index - 1]
       
   popState: (event) =>
     console.log "Loaded history state ", event.state ? "index" : event.state
     s = event.state
     if s
       if s.name
-        @showProject(s.name).fromMain()
+        if s.from_main is true
+          @container.innerHTML = ''
+          @showProject(s.name).fromMain()
+        else
+          console.log "TODO: Draw prew animation"
       else
         @animate().toLeft()
     else
@@ -146,7 +169,8 @@ module.exports = class portfolioOverlay
     parent.addEventListener 'click', (event) =>
       event.preventDefault()
       d = event.target.dataset
-      history.pushState {name: d.name}, d.name, "/project/#{d.name}"
+      history.pushState {name: d.name, from_main: true}, d.name, "/project/#{d.name}"
+      @container.innerHTML = ''
       @showProject(d.name).fromMain()
 
 
