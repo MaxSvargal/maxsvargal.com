@@ -27,8 +27,6 @@ module.exports = class Portfolio
       img.className = "prtf-banner-img"
       img.style.backgroundImage = "url(/images/portfolio/#{name}/banner.jpg)"
       img.dataset.name = name
-      img.dataset.href = "/project/#{name}"
-      img.dataset.title = name
 
       link.appendChild img
       frag.appendChild link

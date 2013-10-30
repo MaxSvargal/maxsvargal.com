@@ -80,18 +80,8 @@
       left: 20%
       top: 18%
       background: #73b865
-      .back
-        display: none
-        font-size: .2em
-        @include transform(rotateY(180deg))
       &:before
         content: "\e804"
-      &:hover
-        @include transform(rotateY(180deg) scale(1.8))
-        .back
-          display: inline-block
-        &:before
-          display: none
 
     &.email
       @include animation-delay(.5s)

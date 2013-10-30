@@ -7,10 +7,6 @@ module.exports = class portfolioOverlay
     @initClickEvents()
     window.addEventListener 'popstate', @popState
 
-    # DEV
-    @createDom {name: '4sound', images: ['01.jpg', '02.jpg'], bg_rgba: "220, 150, 39, .7"}
-    @animate().toRight()
-
   createDom: (data) ->
     frag = document.createDocumentFragment()
     # Portfolio page
@@ -91,27 +87,44 @@ module.exports = class portfolioOverlay
       , 1000)
 
 
+  showProject: (name) ->
+    # Clear container
+    @container.innerHTML = ''
+    #if @prew_btn
+    #  @prew_btn.removeEventListener 'click'
+    #Get info from config by name
+    data = @projects[name]
+    data.name = name
+    @createDom data
+    @registerBackEvent()
+    @animate().toRight()
+
+  registerBackEvent: ->
+    listener = ->
+      @animate().toLeft()
+
+    @prew_btn = (document.getElementsByClassName 'prew-btn')[0]
+    @prew_btn.addEventListener 'click', listener.bind(this), true
+      
   popState: (event) =>
     console.log "Loaded history state ", event.state ? "index" : event.state
     s = event.state
     if s
-      if s.onmain is true
+      if s.name
+        @showProject s.name
+      else
         @animate().toLeft()
-      else if s.name
-        @createDom s
-        @animate().toRight()
     else
-      history.pushState {onmain: true}, "Main", '/'
+      history.replaceState {onmain: true}, "Main", '/'
 
   initClickEvents: ->
     parent = document.getElementById 'portfolio'
     parent.addEventListener 'click', (event) =>
       event.preventDefault()
-      t = event.target
-      history.pushState {name: t.dataset.name}, t.dataset.title, t.dataset.href
-  
-      item_obj = document.getElementById "prtf_box_#{t.dataset.name}"
-      if not item_obj
-        @createDom t.dataset
+      d = event.target.dataset
+      history.pushState {name: d.name}, d.name, "/project/#{d.name}"
+      @showProject d.name
 
-      @animate().toRight()
+
+
+
