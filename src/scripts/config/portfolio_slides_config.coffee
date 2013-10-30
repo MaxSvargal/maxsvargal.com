@@ -19,7 +19,7 @@ module.exports =
 	"vahtang":
 		bg_rgba: "81, 63, 27, .7"
 		images: ["01.jpg", "02.jpg"]
-
+###
 	"imaginarium":
 		bg_rgba: "0, 0, 0, .7"
 		images: ["01.jpg", "02.jpg"]
@@ -27,4 +27,4 @@ module.exports =
 	"alenushka":
 		bg_rgba: "0, 0, 0, .7"
 		images: ["01.jpg", "02.jpg"]
-		
+###
