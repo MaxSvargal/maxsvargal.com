@@ -64,7 +64,4 @@ module.exports =
 		,
 			name: "linux"
 			progress: 0.61
-		,
-			name: "os x"
-			progress: 0.5
 		]

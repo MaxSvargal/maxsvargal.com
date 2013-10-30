@@ -43,7 +43,7 @@ module.exports = (grunt) ->
 				options:
 					client: false
 				files:
-					'public': 'src/index.jade'
+					'public': 'src/*.jade'
 		urequire:
 			dev:
 				template: 'combined'
@@ -92,7 +92,7 @@ module.exports = (grunt) ->
 					interrupt: true
 
 			index:
-				files: 'src/index.jade'
+				files: 'src/*.jade'
 				tasks: 'jade:index'
 				options:
 					interrupt: true
