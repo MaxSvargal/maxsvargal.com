@@ -64,6 +64,11 @@ module.exports = (grunt) ->
 				cwd: 'src/images'
 				src: '**'
 				dest: 'public/images'
+			fonts:
+				expand: true
+				cwd: 'src/fonts'
+				src: '**'
+				dest: 'public/fonts'
 
 		connect:
 			dev:
@@ -125,6 +130,7 @@ module.exports = (grunt) ->
 		'connect:dev'
 		'compass:prod'
 		'copy:img'
+		'copy:fonts'
 	]
 
 	grunt.registerTask 'default', 'dev'
