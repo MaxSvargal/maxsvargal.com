@@ -15,7 +15,13 @@
 .prtf_link
 	display: block
 	position: relative
+	overflow: hidden
+	&:hover
+		.prtf-banner-img
+			@include transform(scale(1.1))
 	.prtf-banner-img
+		@include transition(transform 1s ease-in-out)
+		@include transition-delay(.5s)
 		height: 400px
 		width: 100%
 		background-position: center center
