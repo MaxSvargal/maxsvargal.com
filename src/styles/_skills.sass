@@ -14,7 +14,7 @@
 		.bar
 			display: inline-block
 			height: 2.6em
-			@include background(linear-gradient(bottom top, #fc0697, #ff6d00))
+			@include background(linear-gradient(bottom, #fc0697, #ff6d00))
 			color: #fff
 			text-align: right
 			@@include box-sizing(border-box)
@@ -36,17 +36,17 @@
 			.label
 				color: #0190df
 			.bar
-				@include background(linear-gradient(bottom top, #00a2fd, #03f1d1))
+				@include background(linear-gradient(bottom, #00a2fd, #03f1d1))
 		&.back
 			.label
 				color: #6a00e8
 			.bar
-				@include background(linear-gradient(bottom top, #6a00e8, #d200ff))
+				@include background(linear-gradient(bottom, #6a00e8, #d200ff))
 		&.another
 			.label
 				color: #f09522
 			.bar
-				@include background(linear-gradient(bottom top, #e7b903, #c4eb00))
+				@include background(linear-gradient(bottom, #e7b903, #c4eb00))
 
 	.desc 
 		max-width: 400px
