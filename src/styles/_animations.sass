@@ -1,60 +1,65 @@
+
+
 // main room animations
 
-@-webkit-keyframes rotateRoomLeftOut
+@include keyframes(rotateRoomLeftOut)
   to
-    -webkit-transform: translateX(-100%) rotateY(90deg)
+    @include transform(translateX(-100%) rotateY(90deg))
 
 .pt-page-rotateRoomLeftOut
-  -webkit-transform-origin: 100% 50%
-  -webkit-animation: rotateRoomLeftOut .8s both ease
+  @include transform-origin(100% 50% 0)
+  @include animation(rotateRoomLeftOut .8s both ease)
 
 
-@-webkit-keyframes rotateRoomRightOut
+@include keyframes(rotateRoomRightOut)
   to
-    -webkit-transform: translateX(100%) rotateY(-90deg)
+    @include transform(translateX(100%) rotateY(-90deg))
 
 .pt-page-rotateRoomRightOut
-  -webkit-transform-origin: 0% 50%
-  -webkit-animation: rotateRoomRightOut .8s both ease
+  @include transform-origin(0% 50% 0)
+  @include animation(rotateRoomRightOut .8s both ease)
 
 
-
-@-webkit-keyframes rotateRoomLeftIn
+@include keyframes(rotateRoomLeftIn)
   from
     opacity: .3
-    -webkit-transform: translateX(100%) rotateY(-90deg)
-    
+    @include transform(translateX(100%) rotateY(-90deg))
+
 .pt-page-rotateRoomLeftIn
-  -webkit-transform-origin: 0% 50%
-  -webkit-animation: rotateRoomLeftIn .8s both ease
+  @include transform-origin(0% 50% 0)
+  @include animation(rotateRoomLeftIn .8s both ease)
 
 
-@-webkit-keyframes rotateRoomRightIn
+@include keyframes(rotateRoomRightIn)
   from
     opacity: .3
-    -webkit-transform: translateX(-100%) rotateY(90deg)
+    @include transform(translateX(-100%) rotateY(90deg))
 
 .pt-page-rotateRoomRightIn
-  -webkit-transform-origin: 100% 50%
-  -webkit-animation: rotateRoomRightIn .8s both ease
-
+  @include transform-origin(100% 50% 0)
+  @include animation(rotateRoomRightIn .8s both ease)
 
 
 
 // Next slides
 
-@-webkit-keyframes rotateRoomTopOut
+@include keyframes(rotateRoomTopOut)
   to
     opacity: .3
-    -webkit-transform: translateY(-100%) rotateX(-90deg)
-.pt-page-rotateRoomTopOut
-  -webkit-transform-origin: 50% 100%
-  -webkit-animation: rotateRoomTopOut .8s both ease
+    @include transform(translateY(-100%) rotateX(-90deg))
 
-@-webkit-keyframes rotateRoomTopIn
+.pt-page-rotateRoomTopOut
+  @include transform-origin(50% 100% 0)
+  @include animation(rotateRoomTopOut .8s both ease)
+
+
+@include keyframes(rotateRoomTopIn)
   from
     opacity: .3
-    -webkit-transform: translateY(100%) rotateX(90deg)
+    @include transform(translateY(100%) rotateX(90deg))
+
 .pt-page-rotateRoomTopIn
-  -webkit-transform-origin: 50% 0%
-  -webkit-animation: rotateRoomTopIn .8s both ease
+  @include transform-origin(50% 0% 0)
+  @include animation(rotateRoomTopIn .8s both ease)
+
+  
