@@ -6,6 +6,7 @@ module.exports = class portfolioOverlay
     @container = document.getElementById "portfolio_overlay"
     @initClickEvents()
     window.addEventListener 'popstate', @popState
+    @preloadFirstImages()
 
   createDom: (data) ->
     frag = document.createDocumentFragment()
@@ -100,8 +101,7 @@ module.exports = class portfolioOverlay
 
   showProject: (name) ->
     @curr_project = name
-    # Clear container
-    #@container.innerHTML = ''
+    @preloadImages @getNextProjectName()
     #Get info from config by name
     data = @projects[name]
     data.name = name
@@ -183,6 +183,15 @@ module.exports = class portfolioOverlay
       @clearContainer 0
       @showProject(d.name).fromMain()
 
+  preloadImages: (project) ->
+    console.log "Preload #{project} images"
+    obj = @projects[project]
+    for img_name in obj.images
+      img = new Image()
+      img.src = "/images/portfolio/#{project}/#{img_name}"
 
-
+  preloadFirstImages: ->
+    keys = Object.keys(@projects)
+    name = keys[0]
+    @preloadImages name
 
