@@ -2,7 +2,6 @@
 
 module.exports = class portfolioOverlay
   constructor: (@projects, @bg_animation) ->
-    history.pushState {name: null}, 'Main', '/'
     @main = document.getElementById 'page_main'
     @container = document.getElementById "portfolio_overlay"
     @loadFromUrl()
@@ -174,9 +173,11 @@ module.exports = class portfolioOverlay
     fullpath = window.location.pathname
     path = fullpath.split('/')
     if path[1] is 'project' and path[2]
-      #history.pushState {name: null}, 'Main', '/'
+      history.pushState {name: null}, 'Main', '/'
       history.pushState {name: path[2], from_main: true}, path[2], "/project/#{path[2]}"
       @showProject(path[2]).fromMain()
+    else
+      history.pushState {name: null}, 'Main', '/'
       
   popState: (event) =>
     console.log "Loaded history state ", event.state ? "index" : event.state
