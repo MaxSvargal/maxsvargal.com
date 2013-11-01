@@ -2,12 +2,12 @@
 
 PortfolioSlides = require 'classes/portfolio_slides'
 PortfolioOverlay = require 'classes/portfolio_overlay'
-SkillsBars = require 'classes/skills_bars'
+SkillsBars = require 'classes/skillbars'
 Navigation = require 'classes/navigation'
 Footer = require 'classes/footer'
 
-portfolio_config = require 'config/portfolio_slides_config'
-skills_config = require 'config/skills_bars_config'
+portfolio_config = require 'config/portfolio_config'
+skills_config = require 'config/skillbars_config'
 
 initialization = (->
   skills = new SkillsBars skills_config

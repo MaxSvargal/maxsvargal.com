@@ -1,7 +1,5 @@
 module.exports = 
 	"design":
-		settings:
-			text: "Hello, design!"
 		data: [
 			name: "web-design"
 			progress: 0.9
@@ -17,8 +15,6 @@ module.exports =
 		]
 
 	"front":
-		settings:
-			text: "Hello, coding!"
 		data: [
 			name: "html (jade, haml)"
 			progress: 1

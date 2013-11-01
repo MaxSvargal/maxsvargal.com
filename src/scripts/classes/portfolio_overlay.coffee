@@ -18,15 +18,23 @@ module.exports = class portfolioOverlay
     # Images
     for img_name in data.images
       # Main image box
-      box = document.createElement 'div'
+      if data.link
+        box = document.createElement 'a'
+        box.href = data.link
+        box.target = "_blank"
+      else # If no link in congig
+        box = document.createElement 'div'
       box.className = 'prtf-img-box'
+      
       # Line with buttons
       header = document.createElement 'div'
       header.className = 'prtf-img-header'
+      
       # Buttons in line
       for dotn in [0..2]
         dot = document.createElement 'span'
         header.appendChild dot
+      
       # Portfolio image
       img = document.createElement 'img'
       img.className = 'prtf-img'
