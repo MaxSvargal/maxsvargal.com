@@ -65,3 +65,8 @@ module.exports =
 		bg_rgba: "81, 63, 27, 1"
 		images: ["01.jpg"]
 		link: "http://vahtang.tv/"
+
+	"oldmaxsvargal":
+		bg_rgba: "98, 97, 93, 1"
+		images: ["01.jpg"]
+		link: "http://old.maxsvargal.com/"
