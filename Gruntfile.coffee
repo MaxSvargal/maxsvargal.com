@@ -25,25 +25,13 @@ module.exports = (grunt) ->
 					environment: 'production'
 					require: ['animation']
 
-		jade: 
-			compile:
-				options:
-					debug: false
-					client: true
-					pretty: false
-					self: false
-					locals: true
-					runtime: false
-					wrap:
-						amd: true
-						dependencies: 'jade'
-				files:
-					'public/scripts/templates/': ['src/templates/**/*.jade']
+		jade:
 			index:
 				options:
 					client: false
 				files:
-					'public': 'src/*.jade'
+					'public': 'src/index.jade'
+					
 		urequire:
 			dev:
 				template: 'combined'
@@ -116,7 +104,6 @@ module.exports = (grunt) ->
 	# Default task(s).
 	grunt.registerTask 'dev', [
 		'urequire:dev'
-		'jade:compile'
 		'jade:index'
 		'connect:dev'
 		'compass:dev'
@@ -125,7 +112,6 @@ module.exports = (grunt) ->
 
 	grunt.registerTask 'prod', [
 		'urequire:prod'
-		'jade:compile'
 		'jade:index'
 		'connect:dev'
 		'compass:prod'
