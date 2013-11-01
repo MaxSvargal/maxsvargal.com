@@ -4,6 +4,7 @@ module.exports = class portfolioOverlay
   constructor: (@projects) ->
     @main = document.getElementById 'page_main'
     @container = document.getElementById "portfolio_overlay"
+    @loadFromUrl()
     @initClickEvents()
     window.addEventListener 'popstate', @popState
     @preloadFirstImages()
@@ -166,6 +167,14 @@ module.exports = class portfolioOverlay
     keys = Object.keys(@projects)
     index = keys.indexOf @curr_project
     keys[index - 1]
+
+  loadFromUrl: ->
+    fullpath = window.location.pathname
+    path = fullpath.split('/')
+    if path[1] is 'project' and path[2]
+      history.pushState {name: null}, 'Main', '/'
+      history.pushState {name: path[2], from_main: true}, path[2], "/project/#{path[2]}"
+      @showProject(path[2]).fromMain()
       
   popState: (event) =>
     console.log "Loaded history state ", event.state ? "index" : event.state
@@ -179,8 +188,6 @@ module.exports = class portfolioOverlay
           console.log "TODO: Draw prew animation"
       else
         @animate().toLeft()
-    else
-      history.replaceState {onmain: true}, "Main", '/'
 
   initClickEvents: ->
     parent = document.getElementById 'portfolio'
