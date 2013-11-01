@@ -5,6 +5,8 @@ module.exports = class moveNarrows
     container = document.getElementById 'container'
     @container_height = container.scrollHeight
     @off = false
+    @permament = false
+    @checkMobileDevice()
 
   scrollController: (obj) ->
     page_offset = obj.pageYOffset or obj.scrollTop
@@ -21,7 +23,13 @@ module.exports = class moveNarrows
       @off = true
 
   start: ->
-    console.log "Bg animation enabled."
-    @el_back.className = 'animated'
-    @el_middle.className = 'animated'
-    @off = false
+    if @permament is false
+      console.log "Bg animation enabled."
+      @el_back.className = 'animated'
+      @el_middle.className = 'animated'
+      @off = false
+
+  checkMobileDevice: ->
+    if document.body.offsetWidth <= 600
+      @permament = true
+      @stop()
