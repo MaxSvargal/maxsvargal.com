@@ -18,11 +18,13 @@
 
 #narrows_back
   @include background(image-url("narrows_1.png") repeat scroll 0 0)
-  @include animation(animateNarrows 200s infinite linear)
+  &.animated
+    @include animation(animateNarrows 200s infinite linear)
 
 #narrows_middle
   @include background(image-url("narrows_2.png") repeat scroll 0 0)
-  @include animation(animateNarrows 100s infinite linear)
+  &.animated
+    @include animation(animateNarrows 100s infinite linear)
 
 #narrows_back,
 #narrows_middle

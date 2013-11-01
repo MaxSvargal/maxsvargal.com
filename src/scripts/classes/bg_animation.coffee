@@ -2,12 +2,25 @@ module.exports = class moveNarrows
   constructor: ->
     @el_back = document.getElementById 'narrows_back'
     @el_middle = document.getElementById 'narrows_middle'
-    @start()
+    container = document.getElementById 'container'
+    @container_height = container.scrollHeight
+    @off = false
+
+  scrollController: (obj) ->
+    page_offset = obj.pageYOffset or obj.scrollTop
+    if page_offset >= @container_height
+      if @off is false then @stop()
+    else
+      if @off is true then @start()
+
+  stop: ->
+    console.log "Bg anmation disabled."
+    @el_back.className = ''
+    @el_middle.className = ''
+    @off = true
 
   start: ->
-    pos = 0
-    move = =>
-      @el_back.style.backgroundPositionY = "-#{pos}px"
-      @el_middle.style.backgroundPositionY = "-#{pos*2}px"
-      pos++
-    window.setInterval move, 70
+    console.log "Bg animation enabled."
+    @el_back.className = 'animated'
+    @el_middle.className = 'animated'
+    @off = false
