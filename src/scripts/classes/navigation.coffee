@@ -4,7 +4,6 @@ module.exports = class Navigation
   constructor: ->
     #@onHeaderClick()
     @onMenuClick()
-    #window.addEventListener 'popstate', @popState
 
 
   onHeaderClick: ->
@@ -16,11 +15,11 @@ module.exports = class Navigation
   onMenuClick: ->
     el = document.getElementById 'page_main'
     menu = (document.getElementsByClassName 'main_manu')[0]
-    menu.addEventListener 'click', (event) =>
-      name = event.target.hash.slice 1
+    menu.addEventListener 'click', (event) ->
       #
       # TODO: Remove hardcode
       #
+      name = event.target.hash.slice 1
       o = 0
       switch name
         when 'design' then o = 700
@@ -29,13 +28,8 @@ module.exports = class Navigation
         when 'another' then o = 2750
         when 'portfolio' then o = 1000
         when 'contacts' then o = 10000
-      console.log name, o, el.scrollTop
-
       el.scrollTop = o
-  ###
-  popState: (event) ->
-    s = event.state
-  ###
+
   scrollTo: (el, offset = 0, duration = 1000) ->
     delta = offset / duration * 10
     setTimeout(=>
