@@ -113,7 +113,6 @@ module.exports = (grunt) ->
 	grunt.registerTask 'prod', [
 		'urequire:prod'
 		'jade:index'
-		'connect:dev'
 		'compass:prod'
 		'copy:img'
 		'copy:fonts'
