@@ -14,10 +14,11 @@ module.exports = class moveNarrows
       if @off is true then @start()
 
   stop: ->
-    console.log "Bg anmation disabled."
-    @el_back.className = ''
-    @el_middle.className = ''
-    @off = true
+    if @off is false
+      console.log "Bg anmation disabled."
+      @el_back.className = ''
+      @el_middle.className = ''
+      @off = true
 
   start: ->
     console.log "Bg animation enabled."
