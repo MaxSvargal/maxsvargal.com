@@ -41,7 +41,7 @@ module.exports =
 		link: "http://hightway.maxsvargal.com"
 
 	"pro100doc":
-		bg_rgba: "124, 137, 143, 1"
+		bg_rgba: "226, 124, 104, 1"
 		images: ["01.jpg"]
 		link: "http://pro100doc.ru/"
 
