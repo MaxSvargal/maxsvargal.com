@@ -199,9 +199,8 @@ module.exports = class portfolioOverlay
       @showProject(d.name).fromMain()
 
   preloadImages: (project) ->
-    console.log "Preload #{project} images"
     obj = @projects[project]
-    for img_name in obj.images
+    if obj then for img_name in obj.images
       img = new Image()
       img.src = "/images/portfolio/#{project}/#{img_name}"
 
