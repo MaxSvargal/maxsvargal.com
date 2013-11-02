@@ -39,9 +39,12 @@ module.exports = class Portfolio
   reDraw: (offset) ->
     i = 0
     for name, data of @objs
-      k = (offset / 4) - 270 + (500 * i++)
-      pos = k.toFixed 3
-      @objs[name].style.backgroundPosition = "50% #{pos}px"
+      if offset >= (400 * i) and offset <= (400 * i + (window.innerHeight*2))
+        #console.log "Redraw #{name}"
+        k = (offset / 4) - 270 + (500 * i)
+        pos = k.toFixed 3
+        @objs[name].style.backgroundPosition = "50% #{pos}px"
+      i++
 
   # On every scroll page event this method started
   scrollController: (obj) ->
