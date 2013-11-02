@@ -35,22 +35,30 @@ body
 	max-width: 1000px
 	height: 246px
 	margin-top: 150px
+	position: relative
 	@media screen and(max-width: $break-medium)
 		@include scale(.9)
 		margin-top: 60px
 		background-size: contain
+	@media screen and(max-width: $break-small)
+		margin-top: 20px
+		height: 180px
 
 #owl
 	@include background(image-url("owl.png") no-repeat)
 	width: 90px
 	height: 159px
 	position: absolute
-	top: 20%
+	top: -30%
 	left: 20%
 	@media screen and(max-width: $break-medium)
-		@include scale(.5)
+		@include scale(.8)
 		top: -17%
 		left: 19%
+	@media screen and(max-width: $break-small)
+		@include scale(.5)
+		top: -30%
+		left: 13%
 
 .wrap
 	max-width: 1000px
@@ -65,7 +73,7 @@ body
 		text-decoration: none
 		font-size: 1.2em
 		padding: 1em
-		line-height: 4em
+		line-height: 3em
 		&:hover
 			color: #fe0096
 		@media screen and(max-width: $break-medium)
