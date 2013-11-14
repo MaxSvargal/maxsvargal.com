@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = class Portfolio
-	constructor: (@projects) ->
+  constructor: (@projects) ->
     #If no portfilio objects
     if typeof @projects isnt 'object'
       throw new Error 'You should pass input data of projects'
