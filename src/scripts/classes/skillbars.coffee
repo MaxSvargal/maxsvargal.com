@@ -13,7 +13,7 @@ module.exports = class skillsBars
 			when progress <= 0.3 then "basic"
 			when progress <= 0.6 then "intermediate"
 			when progress <= 0.8 then "advanced"
-			when progress <= 1 then "expert"
+			when progress <= 1 then "good"
 			else "excellent"
 
 	createDom: (name, group) ->
