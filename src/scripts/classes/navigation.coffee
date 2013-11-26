@@ -49,7 +49,7 @@ module.exports = class Navigation
     links = menu.getElementsByTagName 'a'
     for link in links
       link.addEventListener 'click', (event) ->
-        event.preventDefault()
+        #event.preventDefault()
         name = event.target.hash.slice 1
         el = document.getElementById name
         if not el
