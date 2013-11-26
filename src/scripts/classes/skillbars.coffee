@@ -21,7 +21,9 @@ module.exports = class skillsBars
 		cgroup = document.createElement 'div'
 
 		for bname, data of group
-			cgroup = document.getElementById "bars_box_#{name}"
+			cgroup = document.getElementById name
+			if not cgroup
+				throw new Error "Cannot create skills group with id ##{name}"
 			cgroup.className = "group #{name}"
 
 			for item in data
@@ -45,7 +47,7 @@ module.exports = class skillsBars
 				cgroup.appendChild box
 
 	animateBars: (name) ->
-		group = document.getElementById "bars_box_#{name}"
+		group = document.getElementById name
 		return if group.style.disabled is true
 		group.style.disabled = true
 		elems = group.getElementsByClassName 'box'

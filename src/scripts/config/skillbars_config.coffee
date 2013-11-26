@@ -14,7 +14,7 @@ module.exports =
 			progress: 1
 		]
 
-	"front":
+	"frontend":
 		data: [
 			name: "html (jade, haml)"
 			progress: 1
@@ -32,7 +32,7 @@ module.exports =
 			progress: 0.85
 		]
 
-	"back":
+	"backend":
 		data: [
 			name: "node.js"
 			progress: 0.75
