@@ -2,18 +2,18 @@
 
 module.exports = class Navigation
   constructor: ->
-    history.pushState {index: false}, 'Main', '/'
     window.addEventListener 'popstate', @popState
     @container = document.getElementById 'page_main'
     #@onHeaderClick()
     @onMenuClick()
+    @loadFromUrl()
 
   popState: (event) =>
     if event.state
       if event.state.anchor
         stopY = @elmYPosition event.state.anchor
         scrollTo @container, stopY
-      else if event.state.index is false
+      else if event.state.index is true
         scrollTo @container, 0
 
   onHeaderClick: ->
@@ -51,6 +51,7 @@ module.exports = class Navigation
         i -= step
 
   elmYPosition: (id) ->
+    name = id.split('/')
     el = document.getElementById id
     if not el
       throw new Error "No element with id ##{id}"
@@ -68,8 +69,17 @@ module.exports = class Navigation
     for link in links
       link.addEventListener 'click', (event) =>
         event.preventDefault()
-        name = (event.target.getAttribute 'href').slice 1
-        history.pushState {index: true, anchor: name}, 'Section #{name}', name
-
-        stopY = @elmYPosition name
+        path = (event.target.getAttribute 'href').split('/')
+        history.pushState {index: false, anchor: path[2]}, 'Section #{path[2]}', "/to/#{path[2]}"
+        stopY = @elmYPosition path[2]
         scrollTo @container, stopY
+
+  loadFromUrl: ->
+    fullpath = window.location.pathname
+    path = fullpath.split('/')
+    if path[1] is 'to' and path[2]
+      history.pushState {index: true}, 'Main', '/'
+      history.pushState {anchor: path[2], index: false}, path[2], "/to/#{path[2]}"
+      stopY = @elmYPosition path[2]
+      scrollTo @container, stopY
+

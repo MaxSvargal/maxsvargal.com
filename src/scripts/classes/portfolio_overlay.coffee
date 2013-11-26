@@ -151,7 +151,7 @@ module.exports = class portfolioOverlay
         @clearContainer()
       else
         @showProject(name).fromProject()
-        history.pushState {name: name, from_main: false}, name, "/project/#{name}"
+        #history.pushState {name: name, from_main: false}, name, "/project/#{name}"
 
     next_btns = document.getElementsByClassName 'next-btn'
     for btn in next_btns
@@ -172,11 +172,9 @@ module.exports = class portfolioOverlay
     fullpath = window.location.pathname
     path = fullpath.split('/')
     if path[1] is 'project' and path[2]
-      history.pushState {name: null}, 'Main', '/'
+      history.pushState {index: false}, 'Main', '/'
       history.pushState {name: path[2], from_main: true}, path[2], "/project/#{path[2]}"
       @showProject(path[2]).fromMain()
-    else
-      history.pushState {name: null}, 'Main', '/'
       
   popState: (event) =>
     console.log "Loaded history state ", event.state ? "index" : event.state
@@ -189,7 +187,7 @@ module.exports = class portfolioOverlay
         else
           console.log "TODO: Draw prew animation"
 
-      if s.index is true
+      if s.index is false
         @animate().toLeft()
 
   initClickEvents: ->
