@@ -137,7 +137,6 @@ module.exports = class portfolioOverlay
       event.preventDefault()
       @animate().toLeft()
       @clearContainer()
-      history.pushState {onmain: true}, "Main", '/'
 
     prew_btns = document.getElementsByClassName 'prew-btn'
     for btn in prew_btns
@@ -189,7 +188,8 @@ module.exports = class portfolioOverlay
           @showProject(s.name).fromMain()
         else
           console.log "TODO: Draw prew animation"
-      else
+
+      if s.index is true
         @animate().toLeft()
 
   initClickEvents: ->

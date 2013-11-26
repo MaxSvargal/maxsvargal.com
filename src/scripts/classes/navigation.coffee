@@ -2,6 +2,7 @@
 
 module.exports = class Navigation
   constructor: ->
+    history.pushState {index: false}, 'Main', '/'
     window.addEventListener 'popstate', @popState
     @container = document.getElementById 'page_main'
     #@onHeaderClick()
@@ -12,7 +13,7 @@ module.exports = class Navigation
       if event.state.anchor
         stopY = @elmYPosition event.state.anchor
         scrollTo @container, stopY
-      else if event.state.name is null
+      else if event.state.index is false
         scrollTo @container, 0
 
   onHeaderClick: ->
@@ -68,7 +69,7 @@ module.exports = class Navigation
       link.addEventListener 'click', (event) =>
         event.preventDefault()
         name = (event.target.getAttribute 'href').slice 1
-        history.pushState {anchor: name}, 'Section #{name}', name
+        history.pushState {index: true, anchor: name}, 'Section #{name}', name
 
         stopY = @elmYPosition name
         scrollTo @container, stopY
