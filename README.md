@@ -25,11 +25,7 @@ brew install node
 sudo apt-get install ruby
 ```
 ### Os X
-Use [homebrew](https://github.com/mxcl/homebrew)
-```sh
-brew install ruby
-```
-
+Has pre-installed Ruby
 
 ## Install sass and compass with gem
 ```sh
